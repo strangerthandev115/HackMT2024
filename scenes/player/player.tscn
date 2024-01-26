@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://b0iwhan3emqtq"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_jigmr"]
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_7hmb2"]
+
+[node name="Player" type="CharacterBody2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_jigmr")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource("AnimationNodeBlendTree_7hmb2")
+anim_player = NodePath("../AnimationPlayer")
