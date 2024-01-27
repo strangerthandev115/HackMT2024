@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-@export var speed = 30
+@export var main_speed = 30
 @export var terminal_velocity = 300
 @export var drag = 10
 @export var gravity = 10
@@ -14,6 +14,7 @@ extends CharacterBody2D
 @onready var anim = $AnimationTree
 @onready var jumpParticles = $Effects/jumpParticles
 
+var speed = main_speed
 var jump_num = max_jumps
 var is_crouching = false
 var stuck_under_object = false
@@ -52,7 +53,7 @@ func _physics_process(delta):
 		jumpParticles.angle_max = 0 + 20
 		jumpParticles.gravity = Vector2(velocity.x / 8, -velocity.y / 8)
 		jumpParticles.emitting = 0 - 20
-		
+	
 
 	
 	#horixontal movement mechanics
@@ -63,11 +64,10 @@ func _physics_process(delta):
 	
 	if velocity.x > terminal_velocity: #set terminal velocities
 		velocity.x = terminal_velocity
-	elif velocity.x< -terminal_velocity:
+	elif velocity.x < -terminal_velocity:
 		velocity.x = -terminal_velocity
-	if horizontal_direction != 0: #update animation
+	if horizontal_direction != 0: #flip animation if moving
 		switch_direction(horizontal_direction)
-	
 	
 	
 	#crouching mechanics
@@ -88,7 +88,7 @@ func _physics_process(delta):
 	update_animations(horizontal_direction)
 
 
-#uses the 2 raycasts to return true if there is nothing on top
+#uses the shapecast to return true if there is nothing on top
 func above_head_is_empty() -> bool:
 	return !crouch_shapecast.is_colliding()
 
@@ -122,15 +122,13 @@ func update_animations(horizontal_direction):
 #flips the animation direction to left or right depending on the direction of movement
 func switch_direction(horizontal_direction): 
 	sprite.flip_h = (horizontal_direction < 0) #uses horizontal direction to become a boolean
-	sprite.position.x = horizontal_direction #4 is the offset of the sprite from center
 
 
 #updates the boolean and collision shape when crouching
 func crouch():
 	if !is_crouching:
 		is_crouching = true
-		anim.set("crouch_walk_time", 0.5) #set the animation speed to half
-		speed /= 2 #set speed to normal
+		speed = 0 #set velocity to 0
 		cshape.shape = crouching_cshape
 		cshape.position.y = -10.5
 
@@ -140,6 +138,6 @@ func stand():
 	if is_crouching:
 		is_crouching = false
 		anim.set("crouch_walk_time", 1) #set the animation speed to normal
-		speed *= 2 #set speed to normal
+		speed = main_speed #set speed to normal
 		cshape.shape = standing_cshape
 		cshape.position.y = -15
