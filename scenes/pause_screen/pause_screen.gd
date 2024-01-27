@@ -11,12 +11,13 @@ func _input(event):
 	# Check if esc is pressed and swap paused state
 	if event.is_action_pressed("pause"):
 		if pause == false:
+			pause = true
 			get_tree().paused = true
 			show()
-		elif pause == true:
-			hide()
+		else:
+			pause = false
 			get_tree().paused = false
-	pause = !pause
+			hide()
 
 func _on_full_choice_toggled(toggled_on):
 	# Shift screen between windowed and fullscreen
