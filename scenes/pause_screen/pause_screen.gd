@@ -7,9 +7,9 @@ func _ready():
 	# Hide pause menu once in tree
 	hide()
 	
-func _input(event):
+func _process(delta):
 	# Check if esc is pressed and swap paused state
-	if event.is_action_pressed("pause"):
+	if Input.is_action_pressed("pause"):
 		if pause == false:
 			get_tree().paused = true
 			show()
