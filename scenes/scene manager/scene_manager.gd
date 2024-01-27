@@ -16,9 +16,8 @@ func fade_out():
 	emit_signal("faded_out")
 	
 func _ready():
-	# Preloading the main menu scene
-	var main_menu=preload("res://scenes/menu/menu.tscn").instantiate()
 	# Load the main menu scene
+	var main_menu=preload("res://scenes/menu/menu.tscn").instantiate()
 	add_child(main_menu)
 	# Fade into main menu
 	fade_in()
@@ -32,6 +31,8 @@ func transition_to_level_one():
 	# Remove the main menu
 	get_node("Menu").queue_free()
 	# Load in level one
-	
+	var world=preload("res://scenes/world/world.tscn").instantiate()
+	add_child(world)
 	# Fade into level one
 	fade_in()
+	await faded_in
