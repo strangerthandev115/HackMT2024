@@ -29,6 +29,8 @@ func _on_full_choice_toggled(toggled_on):
 func _on_return_title_pressed():
 	# Hide the pause menu
 	hide()
+	# Unpause tree
+	get_tree().paused = false
 	# Emit signal to return to title screen
 	emit_signal("return_title")
 

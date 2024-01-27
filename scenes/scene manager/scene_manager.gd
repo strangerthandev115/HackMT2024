@@ -52,6 +52,8 @@ func return_to_title():
 	# Load in main menu
 	var main_menu=preload("res://scenes/menu/menu.tscn").instantiate()
 	add_child(main_menu)
+	# Connect Main Menu start signal
+	get_node("Menu").connect('start_pressed',transition_to_level_one)
 	# Fade into level one
 	fade_in()
 	await faded_in
