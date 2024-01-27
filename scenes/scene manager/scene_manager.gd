@@ -33,6 +33,9 @@ func transition_to_level_one():
 	# Load in level one
 	var world=preload("res://scenes/world/world.tscn").instantiate()
 	add_child(world)
+	# Load in pause menu
+	var pause=preload("res://scenes/pause_screen/pause_screen.tscn").instantiate()
+	add_child(pause)
 	# Fade into level one
 	fade_in()
 	await faded_in

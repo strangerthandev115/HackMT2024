@@ -150,6 +150,7 @@ Button/styles/normal = SubResource("StyleBoxEmpty_oilyn")
 Button/styles/pressed = SubResource("StyleBoxFlat_m56t7")
 
 [node name="PauseScreen" type="Control"]
+process_mode = 3
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -180,6 +181,7 @@ theme = ExtResource("2_ryr6l")
 text = "Pause Menu"
 
 [node name="ResumeGame" type="Button" parent="."]
+process_mode = 2
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -214,6 +216,7 @@ theme_override_font_sizes/normal_font_size = 26
 text = "Fullscreen"
 
 [node name="FullChoice" type="CheckBox" parent="."]
+process_mode = 2
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.684
@@ -227,6 +230,7 @@ offset_bottom = 11.94
 focus_mode = 0
 
 [node name="ReturnTitle" type="Button" parent="."]
+process_mode = 2
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -243,6 +247,7 @@ theme = SubResource("Theme_mw118")
 text = "Return to title"
 
 [node name="ReturnDesktop" type="Button" parent="."]
+process_mode = 2
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
