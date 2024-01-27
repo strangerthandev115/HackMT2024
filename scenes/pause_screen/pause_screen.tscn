@@ -149,21 +149,27 @@ Button/styles/hover = SubResource("StyleBoxFlat_lm6sm")
 Button/styles/normal = SubResource("StyleBoxEmpty_oilyn")
 Button/styles/pressed = SubResource("StyleBoxFlat_m56t7")
 
-[node name="PauseScreen" type="Control"]
+[node name="PauseMenu" type="CanvasLayer"]
+process_mode = 3
+script = ExtResource("1_vjt2f")
+
+[node name="PauseControl" type="Control" parent="."]
+process_mode = 3
+z_index = 1
+z_as_relative = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_vjt2f")
 
-[node name="PauseTile" type="TileMap" parent="."]
+[node name="PauseTile" type="TileMap" parent="PauseControl"]
 tile_set = SubResource("TileSet_em5tn")
 format = 2
 layer_0/tile_data = PackedInt32Array(65537, 0, 3, 65538, 65536, 3, 65539, 65536, 3, 65540, 65536, 3, 65541, 65536, 3, 65542, 65536, 3, 65543, 65536, 3, 65544, 65536, 3, 65545, 65536, 3, 65546, 65536, 3, 65547, 65536, 3, 65548, 65536, 3, 65549, 65536, 3, 65550, 65536, 3, 65551, 65536, 3, 65552, 65536, 3, 65553, 65536, 3, 65554, 131072, 3, 131073, 0, 4, 196609, 0, 4, 262145, 0, 4, 327681, 0, 4, 393217, 0, 4, 458753, 0, 4, 524289, 0, 4, 589825, 0, 5, 589842, 131072, 5, 524306, 131072, 4, 458770, 131072, 4, 393234, 131072, 4, 327698, 131072, 4, 262162, 131072, 4, 196626, 131072, 4, 131090, 131072, 4, 589826, 65536, 5, 589827, 65536, 5, 589828, 65536, 5, 589829, 65536, 5, 589830, 65536, 5, 589831, 65536, 5, 589832, 65536, 5, 589833, 65536, 5, 589834, 65536, 5, 589835, 65536, 5, 589836, 65536, 5, 589837, 65536, 5, 589838, 65536, 5, 589839, 65536, 5, 589840, 65536, 5, 589841, 65536, 5, 131074, 65536, 4, 131075, 65536, 4, 196611, 65536, 4, 196612, 65536, 4, 196613, 65536, 4, 262149, 65536, 4, 262150, 65536, 4, 262151, 65536, 4, 262152, 65536, 4, 327688, 65536, 4, 327689, 65536, 4, 327690, 65536, 4, 327691, 65536, 4, 327692, 65536, 4, 393228, 65536, 4, 393229, 65536, 4, 393230, 65536, 4, 458766, 65536, 4, 458767, 65536, 4, 458768, 65536, 4, 524304, 65536, 4, 524305, 65536, 4, 524303, 65536, 4, 524302, 65536, 4, 524301, 65536, 4, 524300, 65536, 4, 524299, 65536, 4, 524298, 65536, 4, 524297, 65536, 4, 524296, 65536, 4, 524295, 65536, 4, 458758, 65536, 4, 393222, 65536, 4, 327686, 65536, 4, 327685, 65536, 4, 327684, 65536, 4, 262148, 65536, 4, 262147, 65536, 4, 262146, 65536, 4, 196610, 65536, 4, 327682, 65536, 4, 393218, 65536, 4, 458754, 65536, 4, 524290, 65536, 4, 524291, 65536, 4, 458755, 65536, 4, 393219, 65536, 4, 327683, 65536, 4, 393220, 65536, 4, 458756, 65536, 4, 524292, 65536, 4, 524293, 65536, 4, 458757, 65536, 4, 393221, 65536, 4, 524294, 65536, 4, 327687, 65536, 4, 393223, 65536, 4, 458759, 65536, 4, 458760, 65536, 4, 393224, 65536, 4, 393225, 65536, 4, 458761, 65536, 4, 458762, 65536, 4, 393226, 65536, 4, 393227, 65536, 4, 458763, 65536, 4, 458764, 65536, 4, 458765, 65536, 4, 262157, 65536, 4, 196621, 65536, 4, 131085, 65536, 4, 131084, 65536, 4, 131083, 65536, 4, 131082, 65536, 4, 131081, 65536, 4, 131080, 65536, 4, 131079, 65536, 4, 131078, 65536, 4, 131077, 65536, 4, 131076, 65536, 4, 196614, 65536, 4, 196615, 65536, 4, 196616, 65536, 4, 196617, 65536, 4, 262153, 65536, 4, 262154, 65536, 4, 196618, 65536, 4, 196619, 65536, 4, 262155, 65536, 4, 262156, 65536, 4, 196620, 65536, 4, 131086, 65536, 4, 196622, 65536, 4, 262158, 65536, 4, 327694, 65536, 4, 327693, 65536, 4, 327695, 65536, 4, 262159, 65536, 4, 196623, 65536, 4, 131087, 65536, 4, 131088, 65536, 4, 196624, 65536, 4, 262160, 65536, 4, 327696, 65536, 4, 393232, 65536, 4, 393231, 65536, 4, 393233, 65536, 4, 327697, 65536, 4, 262161, 65536, 4, 196625, 65536, 4, 131089, 65536, 4, 458769, 65536, 4)
 
-[node name="PauseText" type="RichTextLabel" parent="."]
+[node name="PauseText" type="RichTextLabel" parent="PauseControl"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -179,7 +185,8 @@ grow_vertical = 2
 theme = ExtResource("2_ryr6l")
 text = "Pause Menu"
 
-[node name="ResumeGame" type="Button" parent="."]
+[node name="ResumeGame" type="Button" parent="PauseControl"]
+process_mode = 2
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -195,7 +202,7 @@ grow_vertical = 2
 theme = SubResource("Theme_mw118")
 text = "Resume game"
 
-[node name="FullText" type="RichTextLabel" parent="."]
+[node name="FullText" type="RichTextLabel" parent="PauseControl"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -213,7 +220,8 @@ theme_override_colors/default_color = Color(0.87451, 0.87451, 0.87451, 1)
 theme_override_font_sizes/normal_font_size = 26
 text = "Fullscreen"
 
-[node name="FullChoice" type="CheckBox" parent="."]
+[node name="FullChoice" type="CheckBox" parent="PauseControl"]
+process_mode = 2
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.684
@@ -226,23 +234,25 @@ offset_right = 12.12
 offset_bottom = 11.94
 focus_mode = 0
 
-[node name="ReturnTitle" type="Button" parent="."]
+[node name="ReturnTitle" type="Button" parent="PauseControl"]
+process_mode = 2
 layout_mode = 1
-anchors_preset = 8
+anchors_preset = -1
 anchor_left = 0.5
-anchor_top = 0.5
+anchor_top = 0.639
 anchor_right = 0.5
-anchor_bottom = 0.5
+anchor_bottom = 0.639
 offset_left = -102.5
-offset_top = 13.0
+offset_top = -12.02
 offset_right = 102.5
-offset_bottom = 37.0
+offset_bottom = 11.98
 grow_horizontal = 2
 grow_vertical = 2
 theme = SubResource("Theme_mw118")
 text = "Return to title"
 
-[node name="ReturnDesktop" type="Button" parent="."]
+[node name="ReturnDesktop" type="Button" parent="PauseControl"]
+process_mode = 2
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -258,6 +268,7 @@ grow_vertical = 2
 theme = SubResource("Theme_mw118")
 text = "Return to desktop"
 
-[connection signal="toggled" from="FullChoice" to="." method="_on_full_choice_toggled"]
-[connection signal="pressed" from="ReturnTitle" to="." method="_on_return_title_pressed"]
-[connection signal="pressed" from="ReturnDesktop" to="." method="_on_return_desktop_pressed"]
+[connection signal="pressed" from="PauseControl/ResumeGame" to="." method="_on_resume_game_pressed"]
+[connection signal="toggled" from="PauseControl/FullChoice" to="." method="_on_full_choice_toggled"]
+[connection signal="pressed" from="PauseControl/ReturnTitle" to="." method="_on_return_title_pressed"]
+[connection signal="pressed" from="PauseControl/ReturnDesktop" to="." method="_on_return_desktop_pressed"]
