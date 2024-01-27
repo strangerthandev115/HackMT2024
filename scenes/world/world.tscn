@@ -12,7 +12,6 @@
 
 [node name="Player" parent="." instance=ExtResource("2_wfce3")]
 position = Vector2(160, 50)
-start_position = Vector2(160, 50)
 
 [node name="TileMap" parent="." instance=ExtResource("2_wy1vo")]
 process_mode = 1
