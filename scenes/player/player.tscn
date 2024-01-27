@@ -1,6 +1,7 @@
 [gd_scene load_steps=27 format=3 uid="uid://b0iwhan3emqtq"]
 
 [ext_resource type="SpriteFrames" uid="uid://dhg7152veu8rl" path="res://scenes/player/player_frames.tres" id="1_fgoj4"]
+[ext_resource type="Script" path="res://scenes/player/player.gd" id="1_lsbkp"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_jigmr"]
 
@@ -363,6 +364,8 @@ nodes/run/position = Vector2(-320, 320)
 node_connections = [&"Movement", 0, &"Static_crouching", &"Movement", 1, &"run", &"Static_crouching", 0, &"is_alive", &"Static_crouching", 1, &"crouching", &"air_crouch", 0, &"crouch 2", &"air_crouch", 1, &"jump_or_fall", &"in_air_state", 0, &"Movement", &"in_air_state", 1, &"air_crouch", &"is_alive", 0, &"idle", &"is_alive", 1, &"death", &"jump_or_fall", 0, &"jump", &"jump_or_fall", 1, &"falling", &"output", 0, &"in_air_state"]
 
 [node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_lsbkp")
+metadata/player = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -15)

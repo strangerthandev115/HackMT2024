@@ -7,11 +7,13 @@
 [ext_resource type="Texture2D" uid="uid://b58tsnfpdids5" path="res://assets/textures/background/BGFront.png" id="4_dnm0e"]
 
 [node name="ParalaxBackground" type="Node2D"]
+position = Vector2(257, 38)
 
 [node name="SkyBackground" type="ParallaxBackground" parent="."]
 script = ExtResource("1_liwy5")
 
 [node name="SkyBack" type="ParallaxLayer" parent="SkyBackground"]
+position = Vector2(257, 38)
 motion_scale = Vector2(0.1, 0)
 motion_mirroring = Vector2(512, 0)
 
@@ -19,6 +21,7 @@ motion_mirroring = Vector2(512, 0)
 texture = ExtResource("1_v4vhh")
 
 [node name="SkyFront" type="ParallaxLayer" parent="SkyBackground"]
+position = Vector2(257, 38)
 motion_scale = Vector2(0.5, 0)
 motion_mirroring = Vector2(512, 0)
 
@@ -28,6 +31,7 @@ texture = ExtResource("2_vwn23")
 [node name="MountainsBackground" type="ParallaxBackground" parent="."]
 
 [node name="MountainsBack" type="ParallaxLayer" parent="MountainsBackground"]
+position = Vector2(258, 38)
 motion_scale = Vector2(0.015, 0)
 motion_mirroring = Vector2(512, 0)
 
@@ -35,8 +39,10 @@ motion_mirroring = Vector2(512, 0)
 texture = ExtResource("3_ab2fd")
 
 [node name="MountainsFront" type="ParallaxLayer" parent="MountainsBackground"]
+position = Vector2(257, 38)
 motion_scale = Vector2(0.03, 0)
 motion_mirroring = Vector2(512, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="MountainsBackground/MountainsFront"]
+position = Vector2(-1, 0)
 texture = ExtResource("4_dnm0e")
