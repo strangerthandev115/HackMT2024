@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://cl7j2ebhktni0"]
+[gd_scene load_steps=7 format=3 uid="uid://cl7j2ebhktni0"]
 
 [ext_resource type="Script" path="res://scenes/scene manager/scene_manager.gd" id="1_5aogb"]
+[ext_resource type="AudioStream" uid="uid://b6ngimp55rwy" path="res://assets/audio/menu_select.wav" id="2_xu61k"]
 
 [sub_resource type="Animation" id="Animation_27h5y"]
 length = 0.001
@@ -84,3 +85,7 @@ color = Color(0, 0, 0, 1)
 libraries = {
 "": SubResource("AnimationLibrary_76aca")
 }
+
+[node name="ButtonPress" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_xu61k")
+volume_db = -10.306
