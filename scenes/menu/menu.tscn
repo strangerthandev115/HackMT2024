@@ -2,11 +2,11 @@
 
 [ext_resource type="Script" path="res://scenes/menu/menu.gd" id="1_q7gmv"]
 [ext_resource type="PackedScene" uid="uid://cfynsh1cmj2tb" path="res://scenes/paralax_background/paralax_background.tscn" id="2_wlrp5"]
-[ext_resource type="Texture2D" uid="uid://dhm50t3mkvdfc" path="res://assets/textures/tiles/tiles.png" id="3_cef23"]
+[ext_resource type="Texture2D" uid="uid://b7804edsrbcqo" path="res://assets/textures/tilesets/tileset.png" id="3_k3f8g"]
 [ext_resource type="FontFile" uid="uid://bu638ev4rorqq" path="res://assets/fonts/ThaleahFat.ttf" id="4_vm2ku"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_shns0"]
-texture = ExtResource("3_cef23")
+texture = ExtResource("3_k3f8g")
 0:0/0 = 0
 1:0/0 = 0
 2:0/0 = 0
@@ -60,6 +60,24 @@ texture = ExtResource("3_cef23")
 5:5/0 = 0
 6:5/0 = 0
 7:5/0 = 0
+10:1/0 = 0
+11:1/0 = 0
+13:1/0 = 0
+10:2/0 = 0
+11:2/0 = 0
+12:2/0 = 0
+13:2/0 = 0
+0:6/0 = 0
+2:6/0 = 0
+0:7/0 = 0
+1:7/0 = 0
+2:7/0 = 0
+3:7/0 = 0
+4:7/0 = 0
+0:8/0 = 0
+1:8/0 = 0
+2:8/0 = 0
+3:8/0 = 0
 
 [sub_resource type="TileSet" id="TileSet_dys3a"]
 sources/0 = SubResource("TileSetAtlasSource_shns0")

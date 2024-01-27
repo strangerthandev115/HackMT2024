@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://bewr0t5ofjqyd"]
+[gd_scene load_steps=9 format=3 uid="uid://bewr0t5ofjqyd"]
 
 [ext_resource type="PackedScene" uid="uid://b0iwhan3emqtq" path="res://scenes/player/player.tscn" id="1_ytvbn"]
 [ext_resource type="Script" path="res://scenes/paralax_background/SkyBackground.gd" id="3_6i34b"]
@@ -7,6 +7,8 @@
 [ext_resource type="Texture2D" uid="uid://l8lr1payjnbx" path="res://assets/textures/background/CloudsFront.png" id="5_o0yrf"]
 [ext_resource type="Texture2D" uid="uid://bu5vu7emei201" path="res://assets/textures/background/BGBack.png" id="6_i7ls5"]
 [ext_resource type="Texture2D" uid="uid://b58tsnfpdids5" path="res://assets/textures/background/BGFront.png" id="7_7o7cl"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_5wxkd"]
 
 [node name="World" type="Node2D"]
 
@@ -59,3 +61,8 @@ motion_mirroring = Vector2(512, 0)
 [node name="Sprite2D" type="Sprite2D" parent="MountainsBackground/FrontMountains"]
 position = Vector2(64, 35)
 texture = ExtResource("7_7o7cl")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+position = Vector2(14.25, 6.75)
+scale = Vector2(29.5, 14.5)
+texture = SubResource("CanvasTexture_5wxkd")
