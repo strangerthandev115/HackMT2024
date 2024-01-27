@@ -64,9 +64,10 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_5aogb")
 
-[node name="ScreenFader" type="ColorRect" parent="."]
+[node name="ScreenCenter" type="CanvasLayer" parent="."]
+
+[node name="ScreenFader" type="ColorRect" parent="ScreenCenter"]
 z_index = 10
-layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -76,9 +77,10 @@ offset_right = 230.0
 offset_bottom = 193.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 color = Color(0, 0, 0, 1)
 
-[node name="FadePlayer" type="AnimationPlayer" parent="ScreenFader"]
+[node name="FadePlayer" type="AnimationPlayer" parent="ScreenCenter/ScreenFader"]
 libraries = {
 "": SubResource("AnimationLibrary_76aca")
 }

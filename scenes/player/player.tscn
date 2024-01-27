@@ -386,7 +386,7 @@ metadata/player = false
 position = Vector2(0, -17.5)
 sprite_frames = ExtResource("1_fgoj4")
 animation = &"idle"
-frame = 1
+frame = 2
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

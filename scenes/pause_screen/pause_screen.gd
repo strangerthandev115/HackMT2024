@@ -1,4 +1,4 @@
-extends Control
+extends CanvasLayer
 
 signal return_title
 var pause = false
@@ -26,12 +26,22 @@ func _on_full_choice_toggled(toggled_on):
 
 
 func _on_return_title_pressed():
+	# Hide the pause menu
+	hide()
+	# Emit signal to return to title screen
 	emit_signal("return_title")
 
 
 func _on_return_desktop_pressed():
+	# Hide the pause menu
+	hide()
 	# Fade out before closing
 	SceneManager.fade_out()
 	await SceneManager.faded_out
 	# Close the game
 	get_tree().quit()
+
+
+func _on_resume_game_pressed():
+	get_tree().paused = false
+	hide()
