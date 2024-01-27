@@ -1,4 +1,4 @@
-[gd_resource type="SpriteFrames" load_steps=60 format=3 uid="uid://dhg7152veu8rl"]
+[gd_resource type="SpriteFrames" load_steps=57 format=3 uid="uid://dhg7152veu8rl"]
 
 [ext_resource type="Texture2D" uid="uid://1y711nstygbb" path="res://assets/textures/player/adventurer-Sheet.png" id="1_3igkf"]
 
@@ -41,18 +41,6 @@ region = Rect2(300, 185, 50, 37)
 [sub_resource type="AtlasTexture" id="AtlasTexture_qts48"]
 atlas = ExtResource("1_3igkf")
 region = Rect2(200, 185, 50, 37)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ghk1i"]
-atlas = ExtResource("1_3igkf")
-region = Rect2(150, 185, 50, 37)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_igexg"]
-atlas = ExtResource("1_3igkf")
-region = Rect2(200, 185, 50, 37)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_anx7b"]
-atlas = ExtResource("1_3igkf")
-region = Rect2(250, 185, 50, 37)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_nyssn"]
 atlas = ExtResource("1_3igkf")
@@ -272,15 +260,6 @@ animations = [{
 "speed": 7.0
 }, {
 "frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ghk1i")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_igexg")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_anx7b")
-}, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_nyssn")
 }, {
