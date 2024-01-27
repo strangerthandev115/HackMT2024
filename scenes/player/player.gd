@@ -6,7 +6,7 @@ extends CharacterBody2D
 @export var gravity = 10
 @export var jump_velocity = 200
 @export var max_jumps = 2
-@export var start_position = Vector2(0, 0)
+@export var start_position = Vector2(160, 50)
 
 @onready var crouch_shapecast = $CrouchShapeCast2D
 @onready var cshape = $CollisionShape2D
@@ -30,7 +30,7 @@ func _ready():
 
 #executes every frame, for non physics processes
 func _process(delta):
-	if position.y > 500:
+	if position.y > 1000:
 		position = start_position
 	#print(position)
 
