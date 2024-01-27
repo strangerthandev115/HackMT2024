@@ -7,7 +7,6 @@ func _on_start_game_pressed():
 	
 
 func _on_quit_game_pressed():
-	# Fade out before closing
 	SceneManager.fade_out()
 	await SceneManager.faded_out
 	# Close the game
