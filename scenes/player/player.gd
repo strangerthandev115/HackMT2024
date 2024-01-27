@@ -1,10 +1,10 @@
 extends CharacterBody2D
 
-@export var speed = 80
+@export var speed = 50
 @export var terminal_velocity = 300
-@export var drag = 18
-@export var gravity = 30
-@export var jump_velocity = 400
+@export var drag = 10
+@export var gravity = 10
+@export var jump_velocity = 300
 @export var max_jumps = 2
 @export var start_position = Vector2(0, 0)
 
@@ -12,6 +12,7 @@ extends CharacterBody2D
 @onready var cshape = $CollisionShape2D
 @onready var sprite = $AnimatedSprite2D
 @onready var anim = $AnimationTree
+@onready var jumpParticles = $Effects/jumpParticles
 
 var jump_num = max_jumps
 var is_crouching = false
@@ -48,11 +49,15 @@ func _physics_process(delta):
 	if Input.is_action_just_pressed("jump") && jump_num > 0 && !is_crouching: 
 		velocity.y = -jump_velocity
 		jump_num -= 1
+		jumpParticles.angle_max = 0 + 20
+		jumpParticles.gravity = Vector2(velocity.x / 8, -velocity.y / 8)
+		jumpParticles.emitting = 0 - 20
+		
 
 	
 	#horixontal movement mechanics
 	#horizontal direction is between -1 and 1 both or neither is 0
-	var horizontal_direction = Input.get_action_strength("move_right") - Input.get_action_strength("move_left") 
+	var horizontal_direction = Input.get_action_strength("right") - Input.get_action_strength("left") 
 	velocity.x += speed * horizontal_direction #adds the speed times direction to velocity
 	velocity.x -= velocity.x * (drag*delta) 
 	
