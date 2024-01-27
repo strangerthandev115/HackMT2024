@@ -86,6 +86,10 @@ libraries = {
 "": SubResource("AnimationLibrary_76aca")
 }
 
+<<<<<<< Updated upstream
 [node name="ButtonPress" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_xu61k")
 volume_db = -10.306
+=======
+[node name="Game Music" type="AudioStreamPlayer" parent="."]
+>>>>>>> Stashed changes
