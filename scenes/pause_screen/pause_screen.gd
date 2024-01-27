@@ -2,12 +2,6 @@ extends Control
 
 signal return_title
 
-func _ready():
-	# Hide pause menu once in tree
-	hide()
-	
-func _on_
-
 func _on_full_choice_toggled(toggled_on):
 	# Shift screen between windowed and fullscreen
 	if toggled_on:

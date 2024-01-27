@@ -2,19 +2,12 @@
 
 [ext_resource type="Script" path="res://scenes/menu/menu.gd" id="1_q7gmv"]
 [ext_resource type="PackedScene" uid="uid://cfynsh1cmj2tb" path="res://scenes/paralax_background/paralax_background.tscn" id="2_wlrp5"]
-<<<<<<< HEAD
-[ext_resource type="Texture2D" uid="uid://b7804edsrbcqo" path="res://assets/textures/tilesets/tileset.png" id="3_k3f8g"]
+[ext_resource type="Texture2D" uid="uid://b7804edsrbcqo" path="res://assets/textures/tilesets/tileset.png" id="3_14xbp"]
 [ext_resource type="FontFile" uid="uid://bu638ev4rorqq" path="res://assets/fonts/ThaleahFat.ttf" id="4_vm2ku"]
+[ext_resource type="Theme" uid="uid://ccjdu7nrsjjwa" path="res://assets/fonts/font_theme.tres" id="4_ylmq2"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_shns0"]
-texture = ExtResource("3_k3f8g")
-=======
-[ext_resource type="Texture2D" uid="uid://dhm50t3mkvdfc" path="res://assets/textures/tiles/tiles.png" id="3_cef23"]
-[ext_resource type="FontFile" uid="uid://bu638ev4rorqq" path="res://assets/fonts/ThaleahFat.ttf" id="4_vm2ku"]
-
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_shns0"]
-texture = ExtResource("3_cef23")
->>>>>>> parent of 2027b62 (Pause Menu)
+texture = ExtResource("3_14xbp")
 0:0/0 = 0
 1:0/0 = 0
 2:0/0 = 0
@@ -68,15 +61,29 @@ texture = ExtResource("3_cef23")
 5:5/0 = 0
 6:5/0 = 0
 7:5/0 = 0
+10:1/0 = 0
+11:1/0 = 0
+13:1/0 = 0
+10:2/0 = 0
+11:2/0 = 0
+12:2/0 = 0
+13:2/0 = 0
+0:6/0 = 0
+2:6/0 = 0
+0:7/0 = 0
+1:7/0 = 0
+2:7/0 = 0
+3:7/0 = 0
+4:7/0 = 0
+0:8/0 = 0
+1:8/0 = 0
+2:8/0 = 0
+3:8/0 = 0
 
 [sub_resource type="TileSet" id="TileSet_dys3a"]
 sources/0 = SubResource("TileSetAtlasSource_shns0")
 
-[sub_resource type="Theme" id="Theme_p0a06"]
-default_font = ExtResource("4_vm2ku")
-default_font_size = 35
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_o0bd3"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_q7jek"]
 content_margin_left = 4.0
 content_margin_top = 4.0
 content_margin_right = 4.0
@@ -88,7 +95,7 @@ corner_radius_bottom_right = 3
 corner_radius_bottom_left = 3
 corner_detail = 5
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6jln6"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5kaba"]
 content_margin_left = 4.0
 content_margin_top = 4.0
 content_margin_right = 4.0
@@ -109,7 +116,7 @@ expand_margin_top = 2.0
 expand_margin_right = 2.0
 expand_margin_bottom = 2.0
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lm6sm"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_iq7gi"]
 content_margin_left = 4.0
 content_margin_top = 4.0
 content_margin_right = 4.0
@@ -121,9 +128,9 @@ corner_radius_bottom_right = 3
 corner_radius_bottom_left = 3
 corner_detail = 5
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_oilyn"]
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ln4xm"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_m56t7"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fwq61"]
 content_margin_left = 4.0
 content_margin_top = 4.0
 content_margin_right = 4.0
@@ -155,11 +162,11 @@ Button/constants/icon_max_width = 0
 Button/constants/outline_size = 0
 Button/font_sizes/font_size = 25
 Button/fonts/font = ExtResource("4_vm2ku")
-Button/styles/disabled = SubResource("StyleBoxFlat_o0bd3")
-Button/styles/focus = SubResource("StyleBoxFlat_6jln6")
-Button/styles/hover = SubResource("StyleBoxFlat_lm6sm")
-Button/styles/normal = SubResource("StyleBoxEmpty_oilyn")
-Button/styles/pressed = SubResource("StyleBoxFlat_m56t7")
+Button/styles/disabled = SubResource("StyleBoxFlat_q7jek")
+Button/styles/focus = SubResource("StyleBoxFlat_5kaba")
+Button/styles/hover = SubResource("StyleBoxFlat_iq7gi")
+Button/styles/normal = SubResource("StyleBoxEmpty_ln4xm")
+Button/styles/pressed = SubResource("StyleBoxFlat_fwq61")
 
 [node name="Menu" type="Node2D"]
 script = ExtResource("1_q7gmv")
@@ -167,31 +174,32 @@ script = ExtResource("1_q7gmv")
 [node name="ParalaxBackground" parent="." instance=ExtResource("2_wlrp5")]
 
 [node name="TitleNameMap" type="TileMap" parent="."]
+position = Vector2(-2, 2)
 tile_set = SubResource("TileSet_dys3a")
 format = 2
-layer_0/tile_data = PackedInt32Array(65539, 0, 0, 131075, 0, 1, 196611, 0, 2, 131076, 65536, 1, 131077, 65536, 1, 131078, 65536, 1, 131079, 65536, 1, 131080, 65536, 1, 131081, 65536, 1, 131082, 65536, 1, 131083, 65536, 1, 131084, 65536, 1, 131085, 65536, 1, 131086, 65536, 1, 131087, 65536, 1, 131088, 131072, 1, 196624, 131072, 2, 65552, 131072, 0, 196612, 65536, 2, 196613, 65536, 2, 196614, 65536, 2, 196615, 65536, 2, 196616, 65536, 2, 196617, 65536, 2, 196618, 65536, 2, 196619, 65536, 2, 196620, 65536, 2, 196621, 65536, 2, 196622, 65536, 2, 196623, 65536, 2, 65540, 65536, 0, 65541, 65536, 0, 65542, 65536, 0, 65543, 65536, 0, 65544, 65536, 0, 65545, 65536, 0, 65546, 65536, 0, 65547, 65536, 0, 65548, 65536, 0, 65549, 65536, 0, 65550, 65536, 0, 65551, 65536, 0, 458758, 458752, 1, 458766, 589824, 1, 458757, 393216, 1, 458759, 524288, 1, 458760, 458752, 1, 458761, 524288, 1, 458763, 524288, 1, 458765, 524288, 1, 458764, 458752, 1, 458762, 458752, 1, 589830, 393216, 1, 589837, 589824, 1, 589831, 458752, 1, 589833, 458752, 1, 589835, 458752, 1, 589832, 524288, 1, 589834, 524288, 1, 589836, 524288, 1)
+layer_0/tile_data = PackedInt32Array(65539, 0, 0, 131075, 0, 1, 196611, 0, 2, 131076, 65536, 1, 131077, 65536, 1, 131078, 65536, 1, 131079, 65536, 1, 131080, 65536, 1, 131081, 65536, 1, 131082, 65536, 1, 131083, 65536, 1, 131084, 65536, 1, 131085, 65536, 1, 131086, 65536, 1, 131087, 65536, 1, 131088, 131072, 1, 196624, 131072, 2, 65552, 131072, 0, 196612, 65536, 2, 196613, 65536, 2, 196614, 65536, 2, 196615, 65536, 2, 196616, 65536, 2, 196617, 65536, 2, 196618, 65536, 2, 196619, 65536, 2, 196620, 65536, 2, 196621, 65536, 2, 196622, 65536, 2, 196623, 65536, 2, 65540, 65536, 0, 65541, 65536, 0, 65542, 65536, 0, 65543, 65536, 0, 65544, 65536, 0, 65545, 65536, 0, 65546, 65536, 0, 65547, 65536, 0, 65548, 65536, 0, 65549, 65536, 0, 65550, 65536, 0, 65551, 65536, 0, 458766, 851968, 2, 458759, 786432, 2, 458760, 720896, 2, 458761, 786432, 2, 458763, 786432, 2, 458765, 786432, 2, 458764, 720896, 2, 458762, 720896, 2, 589830, 655360, 2, 589837, 851968, 2, 589831, 720896, 2, 589833, 720896, 2, 589835, 786432, 2, 589832, 786432, 2, 589834, 786432, 2, 589836, 720896, 2, 458757, 655360, 2, 458758, 720896, 2)
 
 [node name="TitleText" type="RichTextLabel" parent="TitleNameMap"]
 offset_left = 77.0
 offset_top = 23.0
 offset_right = 240.0
 offset_bottom = 63.0
-theme = SubResource("Theme_p0a06")
+theme = ExtResource("4_ylmq2")
 text = "skylighter"
 
 [node name="StartGame" type="Button" parent="."]
-offset_left = 88.0
-offset_top = 100.0
-offset_right = 233.0
-offset_bottom = 124.0
+offset_left = 87.0
+offset_top = 96.0
+offset_right = 232.0
+offset_bottom = 120.0
 theme = SubResource("Theme_npxxk")
 text = "Start Game"
 
 [node name="QuitGame" type="Button" parent="."]
 offset_left = 88.0
-offset_top = 131.0
+offset_top = 128.0
 offset_right = 233.0
-offset_bottom = 155.0
+offset_bottom = 152.0
 theme = SubResource("Theme_npxxk")
 text = "Quit Game"
 
