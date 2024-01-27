@@ -1,3 +1,10 @@
-[gd_scene format=3 uid="uid://cfynsh1cmj2tb"]
+[gd_scene load_steps=3 format=3 uid="uid://dmr1wsaeiepku"]
 
-[node name="World" type="Node2D"]
+[ext_resource type="PackedScene" uid="uid://cfynsh1cmj2tb" path="res://scenes/paralax_background/paralax_background.tscn" id="1_iv2ou"]
+[ext_resource type="PackedScene" uid="uid://b0iwhan3emqtq" path="res://scenes/player/player.tscn" id="2_wfce3"]
+
+[node name="world" type="Node2D"]
+
+[node name="ParalaxBackground" parent="." instance=ExtResource("1_iv2ou")]
+
+[node name="Player" parent="." instance=ExtResource("2_wfce3")]
