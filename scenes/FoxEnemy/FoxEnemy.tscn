@@ -1,0 +1,79 @@
+[gd_scene load_steps=11 format=3 uid="uid://c06craumnreuy"]
+
+[ext_resource type="Texture2D" uid="uid://bvsn23gb847i4" path="res://assets/textures/enemies/fox/fox.png" id="1_xbgbe"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8m81e"]
+atlas = ExtResource("1_xbgbe")
+region = Rect2(0, 0, 80, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_prwrx"]
+atlas = ExtResource("1_xbgbe")
+region = Rect2(80, 0, 80, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tsa8t"]
+atlas = ExtResource("1_xbgbe")
+region = Rect2(160, 0, 80, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m2gdk"]
+atlas = ExtResource("1_xbgbe")
+region = Rect2(240, 0, 80, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ptagy"]
+atlas = ExtResource("1_xbgbe")
+region = Rect2(320, 0, 80, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_txfwl"]
+atlas = ExtResource("1_xbgbe")
+region = Rect2(400, 0, 80, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wviuu"]
+atlas = ExtResource("1_xbgbe")
+region = Rect2(480, 0, 80, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4r5da"]
+atlas = ExtResource("1_xbgbe")
+region = Rect2(560, 0, 80, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_o7p08"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8m81e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_prwrx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tsa8t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m2gdk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ptagy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_txfwl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wviuu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4r5da")
+}],
+"loop": true,
+"name": &"Running",
+"speed": 5.0
+}]
+
+[node name="FoxEnemy" type="Node2D"]
+
+[node name="RigidBody2D" type="RigidBody2D" parent="."]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="RigidBody2D"]
+sprite_frames = SubResource("SpriteFrames_o7p08")
+animation = &"Running"
+frame = 1
+frame_progress = 0.998479
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
