@@ -288,7 +288,7 @@ input_1/reset = true
 animation = &"crouch"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_wc61a"]
-animation = &"crouch (idle)"
+animation = &"RESET"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_elch2"]
 animation = &"death"
@@ -297,7 +297,7 @@ animation = &"death"
 animation = &"falling"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ixa2u"]
-animation = &"crouch (idle)"
+animation = &"idle"
 
 [sub_resource type="AnimationNodeTransition" id="AnimationNodeTransition_v13v0"]
 input_0/name = "ground"
@@ -338,7 +338,7 @@ input_1/reset = true
 animation = &"run"
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_7hmb2"]
-graph_offset = Vector2(-523.2, -81.6)
+graph_offset = Vector2(-911.04, -159.36)
 nodes/Static_crouching/node = SubResource("AnimationNodeTransition_pi4tb")
 nodes/Static_crouching/position = Vector2(-100, 20)
 nodes/air_crouch/node = SubResource("AnimationNodeTransition_wfhvm")
@@ -378,15 +378,14 @@ particles_anim_loop = false
 colors = PackedColorArray(0.880983, 0.956011, 0.815313, 0.976471, 0.476978, 0.642161, 0.529121, 0)
 
 [node name="Player" type="CharacterBody2D"]
+scale = Vector2(0.5, 0.5)
 script = ExtResource("1_lsbkp")
 metadata/player = false
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -17.5)
 sprite_frames = ExtResource("1_fgoj4")
-animation = &"crouch (idle)"
-autoplay = "idle"
-frame = 1
+animation = &"idle"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
