@@ -1,10 +1,10 @@
 extends CharacterBody2D
 
-@export var speed = 50
+@export var speed = 30
 @export var terminal_velocity = 300
 @export var drag = 10
 @export var gravity = 10
-@export var jump_velocity = 300
+@export var jump_velocity = 200
 @export var max_jumps = 2
 @export var start_position = Vector2(0, 0)
 
@@ -107,7 +107,6 @@ func update_animations(horizontal_direction):
 		
 	if is_crouching:
 		anim.set("parameters/static_crouching/transition_request", "crouch") #crouch
-		anim.set("parameters/moving_crouching/transition_request", "crouch_walk") #crouch walk
 		anim.set("parameters/air_crouch/transition_request", "crouch") #air crouch
 	else:
 		anim.set("parameters/static_crouching/transition_request", "idle") #idle
