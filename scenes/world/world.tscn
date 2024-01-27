@@ -1,10 +1,25 @@
-[gd_scene load_steps=3 format=3 uid="uid://dmr1wsaeiepku"]
+[gd_scene load_steps=5 format=3 uid="uid://dmr1wsaeiepku"]
 
 [ext_resource type="PackedScene" uid="uid://cfynsh1cmj2tb" path="res://scenes/paralax_background/paralax_background.tscn" id="1_iv2ou"]
 [ext_resource type="PackedScene" uid="uid://b0iwhan3emqtq" path="res://scenes/player/player.tscn" id="2_wfce3"]
+[ext_resource type="PackedScene" uid="uid://dos5i7bj7yn21" path="res://assets/tilesets/default.tscn" id="4_uktqo"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8cnbm"]
 
 [node name="world" type="Node2D"]
 
 [node name="ParalaxBackground" parent="." instance=ExtResource("1_iv2ou")]
+position = Vector2(385, 66)
 
 [node name="Player" parent="." instance=ExtResource("2_wfce3")]
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 3855
+collision_mask = 2303
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-80, 18)
+shape = SubResource("RectangleShape2D_8cnbm")
+
+[node name="TileMap" parent="." instance=ExtResource("4_uktqo")]
+layer_0/tile_data = PackedInt32Array(131075, 65537, 1, 131074, 65537, 1, 196607, 65537, 1, 262143, 65537, 2, 262142, 65537, 2, 262141, 1, 2, 196605, 1, 1, 196606, 65537, 1, 196608, 65537, 2, 131073, 65537, 1, 131072, 65537, 1, 196610, 65537, 1, 196609, 65537, 2, 262147, 65537, 2, 196611, 65537, 1, 196613, 131073, 1, 196612, 65537, 1, 131076, 65537, 1, 262149, 131073, 2, 131077, 131073, 1, 262148, 65537, 2, 262146, 1, 2, 327674, 589825, 2, 327673, 458753, 2, 327672, 393217, 2, 65541, 131073, 0, 65540, 65537, 0, 65539, 65537, 0, 65538, 65537, 0, 65537, 65537, 0, 65536, 65537, 0, 131071, 65537, 0, 131070, 65537, 0, 131069, 1, 0)

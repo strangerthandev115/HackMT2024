@@ -1,12 +1,15 @@
-[gd_scene load_steps=4 format=3 uid="uid://b0iwhan3emqtq"]
+[gd_scene load_steps=5 format=3 uid="uid://b0iwhan3emqtq"]
 
 [ext_resource type="SpriteFrames" uid="uid://dhg7152veu8rl" path="res://scenes/player/player_frames.tres" id="1_fgoj4"]
+[ext_resource type="Script" path="res://scenes/player/player.gd" id="1_lsbkp"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_jigmr"]
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_7hmb2"]
 
 [node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_lsbkp")
+metadata/player = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_jigmr")
