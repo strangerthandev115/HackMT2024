@@ -1,6 +1,7 @@
-[gd_scene load_steps=12 format=3 uid="uid://boad44k2ingsg"]
+[gd_scene load_steps=13 format=3 uid="uid://boad44k2ingsg"]
 
-[ext_resource type="Texture2D" uid="uid://dhm50t3mkvdfc" path="res://assets/textures/tiles/tiles.png" id="1_psmre"]
+[ext_resource type="Texture2D" uid="uid://b7804edsrbcqo" path="res://assets/textures/tilesets/tileset.png" id="1_psmre"]
+[ext_resource type="Script" path="res://scenes/pause_screen/pause_screen.gd" id="1_vjt2f"]
 [ext_resource type="Theme" uid="uid://ccjdu7nrsjjwa" path="res://assets/fonts/font_theme.tres" id="2_ryr6l"]
 [ext_resource type="FontFile" uid="uid://bu638ev4rorqq" path="res://assets/fonts/ThaleahFat.ttf" id="3_lodyx"]
 
@@ -155,6 +156,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_vjt2f")
 
 [node name="PauseTile" type="TileMap" parent="."]
 tile_set = SubResource("TileSet_em5tn")
@@ -177,7 +179,7 @@ grow_vertical = 2
 theme = ExtResource("2_ryr6l")
 text = "Pause Menu"
 
-[node name="ReturnDesktop" type="Button" parent="."]
+[node name="ResumeGame" type="Button" parent="."]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -185,13 +187,44 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -102.5
-offset_top = 33.0
+offset_top = -31.0
 offset_right = 102.5
-offset_bottom = 57.0
+offset_bottom = -7.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = SubResource("Theme_mw118")
-text = "Return to desktop"
+text = "Resume game"
+
+[node name="FullText" type="RichTextLabel" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -82.0
+offset_top = -9.0
+offset_right = 49.0
+offset_bottom = 17.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_ryr6l")
+theme_override_colors/default_color = Color(0.87451, 0.87451, 0.87451, 1)
+theme_override_font_sizes/normal_font_size = 26
+text = "Fullscreen"
+
+[node name="FullChoice" type="CheckBox" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.684
+anchor_top = 0.517
+anchor_right = 0.684
+anchor_bottom = 0.517
+offset_left = -11.88
+offset_top = -12.06
+offset_right = 12.12
+offset_bottom = 11.94
+focus_mode = 0
 
 [node name="ReturnTitle" type="Button" parent="."]
 layout_mode = 1
@@ -201,10 +234,30 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -102.5
-offset_top = 11.0
+offset_top = 13.0
 offset_right = 102.5
-offset_bottom = 35.0
+offset_bottom = 37.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = SubResource("Theme_mw118")
 text = "Return to title"
+
+[node name="ReturnDesktop" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -103.5
+offset_top = 34.0
+offset_right = 101.5
+offset_bottom = 58.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_mw118")
+text = "Return to desktop"
+
+[connection signal="toggled" from="FullChoice" to="." method="_on_full_choice_toggled"]
+[connection signal="pressed" from="ReturnTitle" to="." method="_on_return_title_pressed"]
+[connection signal="pressed" from="ReturnDesktop" to="." method="_on_return_desktop_pressed"]
