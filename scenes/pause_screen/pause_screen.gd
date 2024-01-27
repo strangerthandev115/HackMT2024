@@ -17,6 +17,7 @@ func _input(event):
 			hide()
 			get_tree().paused = false
 	pause = !pause
+
 func _on_full_choice_toggled(toggled_on):
 	# Shift screen between windowed and fullscreen
 	if toggled_on:

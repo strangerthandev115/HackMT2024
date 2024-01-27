@@ -1,10 +1,10 @@
 extends CharacterBody2D
 
-@export var speed = 50
+@export var speed = 30
 @export var terminal_velocity = 300
 @export var drag = 10
 @export var gravity = 10
-@export var jump_velocity = 300
+@export var jump_velocity = 200
 @export var max_jumps = 2
 @export var start_position = Vector2(0, 0)
 
@@ -17,15 +17,16 @@ extends CharacterBody2D
 var jump_num = max_jumps
 var is_crouching = false
 var stuck_under_object = false
-var is_climbing = false
 
 var standing_cshape = preload("res://scenes/player/StandingCollisionShape.tres")
 var crouching_cshape = preload("res://scenes/player/CrouchCollisionShape.tres")
+
 
 #this happens onece when load into the screen
 func _ready():
 	position = start_position
 	anim.active = true
+
 
 #executes every frame, for non physics processes
 func _process(delta):
@@ -52,20 +53,18 @@ func _physics_process(delta):
 		jumpParticles.gravity = Vector2(velocity.x / 8, -velocity.y / 8)
 		jumpParticles.emitting = 0 - 20
 		
-	var horizontal_direction = Input.get_action_strength("right") - Input.get_action_strength("left")
+
 	
-	if is_climbing:
-		velocity.y = Input.get_action_strength("ui_up") - Input.get_action_strength("ui_down")
-	else:
-		#horixontal movement mechanics
-		#horizontal direction is between -1 and 1 both or neither is 0 
-		velocity.x += speed * horizontal_direction #adds the speed times direction to velocity
-		velocity.x -= velocity.x * (drag*delta) 
-		
-		if velocity.x > terminal_velocity: #set terminal velocities
-			velocity.x = terminal_velocity
-		elif velocity.x< -terminal_velocity:
-			velocity.x = -terminal_velocity
+	#horixontal movement mechanics
+	#horizontal direction is between -1 and 1 both or neither is 0
+	var horizontal_direction = Input.get_action_strength("right") - Input.get_action_strength("left") 
+	velocity.x += speed * horizontal_direction #adds the speed times direction to velocity
+	velocity.x -= velocity.x * (drag*delta) 
+	
+	if velocity.x > terminal_velocity: #set terminal velocities
+		velocity.x = terminal_velocity
+	elif velocity.x< -terminal_velocity:
+		velocity.x = -terminal_velocity
 	if horizontal_direction != 0: #update animation
 		switch_direction(horizontal_direction)
 	
@@ -101,14 +100,13 @@ func update_animations(horizontal_direction):
 	else:
 		anim.set("parameters/in_air_state/transition_request", "air") #air
 	
-	if horizontal_direction == 0 || is_on_wall(): 
+	if horizontal_direction == 0: 
 		anim.set("parameters/movement/transition_request", "static") #not moving
 	else:
 		anim.set("parameters/movement/transition_request", "moving") #moving
 		
 	if is_crouching:
 		anim.set("parameters/static_crouching/transition_request", "crouch") #crouch
-		anim.set("parameters/moving_crouching/transition_request", "crouch_walk") #crouch walk
 		anim.set("parameters/air_crouch/transition_request", "crouch") #air crouch
 	else:
 		anim.set("parameters/static_crouching/transition_request", "idle") #idle
