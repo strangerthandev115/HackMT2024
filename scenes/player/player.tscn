@@ -2,8 +2,8 @@
 
 [ext_resource type="SpriteFrames" uid="uid://dhg7152veu8rl" path="res://scenes/player/player_frames.tres" id="1_fgoj4"]
 [ext_resource type="Script" path="res://scenes/player/player.gd" id="1_lsbkp"]
-[ext_resource type="Shape2D" uid="uid://bjs6uxtqlgw1q" path="res://scenes/player/CrouchCollisionShape.tres" id="3_ruosv"]
-[ext_resource type="Shape2D" uid="uid://2nydl5rx8vi2" path="res://scenes/player/StandingCollisionShape.tres" id="4_ces4e"]
+[ext_resource type="Shape2D" path="res://scenes/player/CrouchCollisionShape.tres" id="3_ruosv"]
+[ext_resource type="Shape2D" path="res://scenes/player/StandingCollisionShape.tres" id="4_ces4e"]
 [ext_resource type="Texture2D" uid="uid://c6vbh6pla1oyt" path="res://assets/textures/other/particle.png" id="5_38dyt"]
 
 [sub_resource type="Animation" id="Animation_54lqy"]
