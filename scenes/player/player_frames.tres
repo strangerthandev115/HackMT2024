@@ -365,7 +365,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_6ucg3")
 }],
-"loop": false,
+"loop": true,
 "name": &"idle",
 "speed": 4.0
 }, {
@@ -403,11 +403,6 @@ animations = [{
 "loop": false,
 "name": &"jump",
 "speed": 10.0
-}, {
-"frames": [],
-"loop": true,
-"name": &"new_animation",
-"speed": 5.0
 }, {
 "frames": [{
 "duration": 1.0,
