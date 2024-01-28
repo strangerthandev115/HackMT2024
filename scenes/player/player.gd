@@ -2,7 +2,8 @@ extends CharacterBody2D
 
 @export var main_speed = 30
 @export var terminal_velocity = 300
-@export var drag = 10
+@export var normal_drag = 10
+@export var ice_drag = 5
 @export var gravity = 10
 @export var jump_velocity = 200
 @export var max_jumps = 2
@@ -18,6 +19,7 @@ extends CharacterBody2D
 var speed = main_speed
 var jump_num = max_jumps
 var lives = max_lives
+var drag = normal_drag
 var is_crouching = false
 var can_move = true
 var stuck_under_object = false
@@ -37,8 +39,11 @@ func _ready():
 func _process(delta):
 	if position.y > 1000:
 		$FallDeath.play(0.4)
+		lives = max_lives
 		position = start_position
-	#print(position)
+		
+	print(position)
+	print(drag)
 	#if Input.is_action_just_pressed("die"):
 		#win()
 	
@@ -78,11 +83,17 @@ func win():
 func _physics_process(delta):
 	#falling mechanics
 	if !is_on_floor():
+		drag = normal_drag
 		velocity.y += gravity
 		if velocity.y > terminal_velocity: #implement terminal velocity
 			velocity.y = terminal_velocity
 	else:
 		jump_num = max_jumps #reset number of jumps if on floor	
+		if position.x < 200: #3580
+			drag = ice_drag
+		else:
+			drag = normal_drag
+	
 	
 	#jumping mechanics
 	if Input.is_action_just_pressed("jump") && jump_num > 0 && !is_crouching && can_move: 
@@ -99,7 +110,10 @@ func _physics_process(delta):
 	#horizontal direction is between -1 and 1 both or neither is 0
 	var horizontal_direction = Input.get_action_strength("right") - Input.get_action_strength("left") 
 	if can_move:
-		velocity.x += speed * horizontal_direction #adds the speed times direction to velocity
+		if velocity.x*horizontal_direction>terminal_velocity*.75 && drag==ice_drag:
+			velocity.x += terminal_velocity * 0.01 * horizontal_direction
+		else:
+			velocity.x += speed * horizontal_direction #adds the speed times direction to velocity
 		velocity.x -= velocity.x * (drag*delta) 
 	else:
 		velocity.x = 0

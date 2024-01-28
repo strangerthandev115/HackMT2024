@@ -480,6 +480,7 @@ scale = Vector2(0.5, 0.5)
 collision_layer = 129
 collision_mask = 129
 script = ExtResource("1_lsbkp")
+ice_drag = 3
 metadata/player = false
 
 [node name="Lives" parent="." instance=ExtResource("2_73gsv")]
