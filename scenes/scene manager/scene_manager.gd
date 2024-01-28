@@ -15,6 +15,10 @@ func fade_out():
 	await $ScreenCenter/ScreenFader/FadePlayer.animation_finished
 	emit_signal("faded_out")
 	
+# Wrapper function for playing button press sound
+func button_chime():
+	$ButtonPress.play()
+	
 func _ready():
 	# Load the main menu scene
 	var main_menu=preload("res://scenes/menu/menu.tscn").instantiate()

@@ -10,6 +10,7 @@ func _ready():
 func _input(event):
 	# Check if esc is pressed and swap paused state
 	if event.is_action_pressed("pause"):
+		$PauseControl/PauseAudio.play()
 		if pause == false:
 			pause = true
 			get_tree().paused = true
@@ -20,6 +21,7 @@ func _input(event):
 			hide()
 
 func _on_full_choice_toggled(toggled_on):
+	SceneManager.button_chime()
 	# Shift screen between windowed and fullscreen
 	if toggled_on:
 		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
@@ -28,6 +30,7 @@ func _on_full_choice_toggled(toggled_on):
 
 
 func _on_return_title_pressed():
+	SceneManager.button_chime()
 	# Hide the pause menu
 	hide()
 	# Unpause tree
@@ -37,6 +40,7 @@ func _on_return_title_pressed():
 
 
 func _on_return_desktop_pressed():
+	SceneManager.button_chime()
 	# Hide the pause menu
 	hide()
 	# Fade out before closing
@@ -47,5 +51,7 @@ func _on_return_desktop_pressed():
 
 
 func _on_resume_game_pressed():
+	# Unpause processes and hide pause menu
+	SceneManager.button_chime()
 	get_tree().paused = false
 	hide()

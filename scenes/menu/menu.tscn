@@ -1,10 +1,12 @@
-[gd_scene load_steps=14 format=3 uid="uid://bpt2hb1tomxi2"]
+[gd_scene load_steps=16 format=3 uid="uid://bpt2hb1tomxi2"]
 
 [ext_resource type="Script" path="res://scenes/menu/menu.gd" id="1_q7gmv"]
 [ext_resource type="PackedScene" uid="uid://cfynsh1cmj2tb" path="res://scenes/paralax_background/paralax_background.tscn" id="2_wlrp5"]
 [ext_resource type="Texture2D" uid="uid://b7804edsrbcqo" path="res://assets/textures/tilesets/tileset.png" id="3_14xbp"]
 [ext_resource type="FontFile" uid="uid://bu638ev4rorqq" path="res://assets/fonts/ThaleahFat.ttf" id="4_vm2ku"]
 [ext_resource type="Theme" uid="uid://ccjdu7nrsjjwa" path="res://assets/fonts/font_theme.tres" id="4_ylmq2"]
+[ext_resource type="AudioStream" uid="uid://btc5kqyoeupqn" path="res://assets/audio/music_menu_CREDIT_Trevor_Kentz.mp3" id="6_ulpo8"]
+[ext_resource type="PackedScene" uid="uid://cjqvmxsqpukj4" path="res://scenes/credits/credits.tscn" id="7_plg4r"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_shns0"]
 texture = ExtResource("3_14xbp")
@@ -172,36 +174,79 @@ Button/styles/pressed = SubResource("StyleBoxFlat_fwq61")
 script = ExtResource("1_q7gmv")
 
 [node name="ParalaxBackground" parent="." instance=ExtResource("2_wlrp5")]
+position = Vector2(96, 37)
 
 [node name="TitleNameMap" type="TileMap" parent="."]
 position = Vector2(-2, 2)
 tile_set = SubResource("TileSet_dys3a")
 format = 2
-layer_0/tile_data = PackedInt32Array(65539, 0, 0, 131075, 0, 1, 196611, 0, 2, 131076, 65536, 1, 131077, 65536, 1, 131078, 65536, 1, 131079, 65536, 1, 131080, 65536, 1, 131081, 65536, 1, 131082, 65536, 1, 131083, 65536, 1, 131084, 65536, 1, 131085, 65536, 1, 131086, 65536, 1, 131087, 65536, 1, 131088, 131072, 1, 196624, 131072, 2, 65552, 131072, 0, 196612, 65536, 2, 196613, 65536, 2, 196614, 65536, 2, 196615, 65536, 2, 196616, 65536, 2, 196617, 65536, 2, 196618, 65536, 2, 196619, 65536, 2, 196620, 65536, 2, 196621, 65536, 2, 196622, 65536, 2, 196623, 65536, 2, 65540, 65536, 0, 65541, 65536, 0, 65542, 65536, 0, 65543, 65536, 0, 65544, 65536, 0, 65545, 65536, 0, 65546, 65536, 0, 65547, 65536, 0, 65548, 65536, 0, 65549, 65536, 0, 65550, 65536, 0, 65551, 65536, 0, 458766, 851968, 2, 458759, 786432, 2, 458760, 720896, 2, 458761, 786432, 2, 458763, 786432, 2, 458765, 786432, 2, 458764, 720896, 2, 458762, 720896, 2, 589830, 655360, 2, 589837, 851968, 2, 589831, 720896, 2, 589833, 720896, 2, 589835, 786432, 2, 589832, 786432, 2, 589834, 786432, 2, 589836, 720896, 2, 458757, 655360, 2, 458758, 720896, 2)
+layer_0/tile_data = PackedInt32Array(65539, 0, 0, 131075, 0, 1, 196611, 0, 2, 131076, 65536, 1, 131077, 65536, 1, 131078, 65536, 1, 131079, 65536, 1, 131080, 65536, 1, 131081, 65536, 1, 131082, 65536, 1, 131083, 65536, 1, 131084, 65536, 1, 131085, 65536, 1, 131086, 65536, 1, 131087, 65536, 1, 131088, 131072, 1, 196624, 131072, 2, 65552, 131072, 0, 196612, 65536, 2, 196613, 65536, 2, 196614, 65536, 2, 196615, 65536, 2, 196616, 65536, 2, 196617, 65536, 2, 196618, 65536, 2, 196619, 65536, 2, 196620, 65536, 2, 196621, 65536, 2, 196622, 65536, 2, 196623, 65536, 2, 65540, 65536, 0, 65541, 65536, 0, 65542, 65536, 0, 65543, 65536, 0, 65544, 65536, 0, 65545, 65536, 0, 65546, 65536, 0, 65547, 65536, 0, 65548, 65536, 0, 65549, 65536, 0, 65550, 65536, 0, 65551, 65536, 0, 458766, 851968, 2, 458759, 786432, 2, 458760, 720896, 2, 458761, 786432, 2, 458763, 786432, 2, 458765, 786432, 2, 458764, 720896, 2, 458762, 720896, 2, 458757, 655360, 2, 458758, 720896, 2, 589827, 655360, 2, 589840, 851968, 2, 589828, 720896, 2, 589830, 720896, 2, 589832, 720896, 2, 589834, 720896, 2, 589836, 720896, 2, 589838, 720896, 2, 589829, 786432, 2, 589831, 786432, 2, 589833, 786432, 2, 589835, 786432, 2, 589837, 786432, 2, 589839, 786432, 2)
 
-[node name="TitleText" type="RichTextLabel" parent="TitleNameMap"]
-offset_left = 77.0
-offset_top = 23.0
-offset_right = 240.0
-offset_bottom = 63.0
-theme = ExtResource("4_ylmq2")
-text = "skylighter"
-
-[node name="StartGame" type="Button" parent="."]
-offset_left = 87.0
-offset_top = 96.0
-offset_right = 232.0
-offset_bottom = 120.0
+[node name="StartGame" type="Button" parent="TitleNameMap"]
+offset_left = 89.0
+offset_top = 94.0
+offset_right = 234.0
+offset_bottom = 118.0
 theme = SubResource("Theme_npxxk")
 text = "Start Game"
 
-[node name="QuitGame" type="Button" parent="."]
-offset_left = 88.0
-offset_top = 128.0
-offset_right = 233.0
-offset_bottom = 152.0
+[node name="TitleText" type="RichTextLabel" parent="TitleNameMap"]
+offset_left = 85.0
+offset_top = 24.0
+offset_right = 248.0
+offset_bottom = 64.0
+theme = ExtResource("4_ylmq2")
+theme_override_font_sizes/normal_font_size = 32
+text = "skylighter"
+
+[node name="CreditsView" type="Button" parent="TitleNameMap"]
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = 64.0
+offset_top = 126.0
+offset_right = 147.0
+offset_bottom = 150.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = SubResource("Theme_npxxk")
+text = "Credits"
+
+[node name="QuitGame" type="Button" parent="TitleNameMap"]
+offset_left = 148.0
+offset_top = 126.0
+offset_right = 258.0
+offset_bottom = 150.0
 theme = SubResource("Theme_npxxk")
 text = "Quit Game"
 
-[connection signal="pressed" from="StartGame" to="." method="_on_start_game_pressed"]
-[connection signal="pressed" from="QuitGame" to="." method="_on_quit_game_pressed"]
+[node name="MainMenuMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_ulpo8")
+volume_db = -15.459
+autoplay = true
+
+[node name="CreditsBack" type="Button" parent="."]
+visible = false
+anchors_preset = -1
+anchor_left = 0.138
+anchor_top = 0.219
+anchor_right = 0.145
+anchor_bottom = 0.219
+offset_left = 34.0
+offset_top = 32.0
+offset_right = 65.0
+offset_bottom = 63.0
+theme = SubResource("Theme_npxxk")
+text = "←"
+
+[node name="CreditsCanvas" parent="CreditsBack" instance=ExtResource("7_plg4r")]
+layer = -1
+visible = false
+
+[connection signal="pressed" from="TitleNameMap/StartGame" to="." method="_on_start_game_pressed"]
+[connection signal="pressed" from="TitleNameMap/CreditsView" to="." method="_on_credits_view_pressed"]
+[connection signal="pressed" from="TitleNameMap/QuitGame" to="." method="_on_quit_game_pressed"]
+[connection signal="pressed" from="CreditsBack" to="." method="_on_credits_back_pressed"]
