@@ -42,6 +42,8 @@ func transition_to_level_one():
 	add_child(pause)
 	# Connect signal for returning later
 	pause.connect('return_title', return_to_title)
+	# Connect win signal to game
+	get_node("world/Player").connect('win_signal',player_won)
 	# Fade into level one
 	fade_in()
 	await faded_in
@@ -61,3 +63,17 @@ func return_to_title():
 	# Fade into level one
 	fade_in()
 	await faded_in
+
+func player_won():
+	# Show win screen
+	$Win.show()
+	# Pause game
+	get_tree().paused = true
+	# Wait 5 seconds
+	await get_tree().create_timer(2.0).timeout
+	# Hide win screen
+	$Win.hide()
+	# Unpause game
+	get_tree().paused = false
+	# Return to main menu
+	return_to_title()
