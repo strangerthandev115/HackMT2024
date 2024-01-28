@@ -1,4 +1,4 @@
-extends Node2D
+extends CharacterBody2D
 var patrolSpeed = 20
 var chaseSpeed = 40
 var direction = 1
@@ -7,40 +7,48 @@ var substate = 'idle'
 var idle_countdown_initial = 20.0
 var idle_countdown: float
 var health = 3
-var aggro_radius = 200
+@onready var sprite = $AnimatedSprite2D
+@onready var anim = $AnimationPlayer
+# var aggro_radius = 200
 var player_in_aggro_radius = false
 var player_in_attack_attempt_radius = false
 var finishedAnimation = false
+# var harming_enabled = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	idle_countdown = idle_countdown_initial
+	anim.play("Idle")
 
 # Updates sprite animation to the specified animation
 func set_animation(a):
 	finishedAnimation = false # Reset animation-finished flag whenever new animation starts
-	$SkeletonBody/AnimatedSprite2D.animation = a
+	# $AnimatedSprite2D.animation = a
+	anim.play(a)
 
 func attack_attempt_check():
 	return player_in_attack_attempt_radius
 
 # Detect if a patrolling skeleton has reached a wall or ledge
 func stopping_point():
-	if !$LedgeDetector.is_colliding() or $WallDetector.is_colliding():
+	if !$LedgeDetector.is_colliding(): # or $WallDetector.is_colliding():
 		return true
 	return false
 
 # Turns skeleton in opposite direction; used when patrolling
 func flip_character():
 	direction *= -1
-	$SkeletonBody/AnimatedSprite2D.flip_h = !$SkeletonBody.AnimatedSprite2D.flip_h
+	$LedgeDetector.position.x *= -1
+	sprite.offset.x *= -1
+	sprite.flip_h = !sprite.flip_h
 
 # Sets Skeleton sprite to face a specified direction; used when chasing
 func set_sprite_facing(posneg):
+	direction *= -1
 	if posneg > 0:
-		$SkeletonBody/AnimatedSprite2D.flip_h = false
+		sprite.flip_h = false
 	else:
-		$SkeletonBody/AnimatedSprite2D.flip_h = true
+		sprite.flip_h = true
 
 func patrol_behavior(delta):
 	if player_in_aggro_radius:
@@ -54,12 +62,12 @@ func patrol_behavior(delta):
 		else:
 			idle_countdown = idle_countdown_initial
 			substate = 'walk'
-			set_animation(&"Walk")
+			set_animation("Walk")
 	elif substate == 'walk':
 		if stopping_point():
 			flip_character()
 			substate = 'idle'
-			set_animation(&"Idle")
+			set_animation("Idle")
 
 func physics_patrol_behavior(delta):
 	if substate == 'walk' and not stopping_point():
@@ -80,12 +88,12 @@ func aggro_behavior():
 	if substate == 'hit':
 		if finishedAnimation:
 			substate = 'chase'
-			set_animation(&"Walk")
+			set_animation("Walk")
 	
 	if substate == 'reacting':
 		if finishedAnimation:
 			substate = 'chase'
-			set_animation(&"Walk")
+			set_animation("Walk")
 	
 	if attack_attempt_check() and substate != 'attacking':
 		substate = 'attacking'
@@ -95,7 +103,7 @@ func aggro_behavior():
 			# TODO: enable hurt box
 			# TODO: disable hurt box
 			substate = 'chase'
-			set_animation(&"Walk")
+			set_animation("Walk")
 	
 	if substate == 'chase':
 		set_sprite_facing(relative_player_direction)
@@ -113,7 +121,7 @@ func relative_player_direction():
 	return 1
 
 func physics_aggro_behavior(delta):
-	if substate == 'chase' # and not barrier_collision():
+	if substate == 'chase': # and not barrier_collision():
 		position += delta * chaseSpeed * relative_player_direction() * Vector2(1, 0)
 		pass
 
@@ -131,6 +139,8 @@ func _process(delta):
 		die_behavior()
 	
 func _physics_process(delta):
+	$Hurtbox2.angular_damp_space_override = $Hurtbox2.angular_damp_space_override
+	move_and_slide()
 	if state == 'patrol':
 		physics_patrol_behavior(delta)
 	elif state == 'aggro':
@@ -154,3 +164,10 @@ func _on_attack_attempt_radius_body_entered(body):
 func _on_attack_attempt_radius_body_exited(body):
 	if body.name == 'player':
 		player_in_attack_attempt_radius = false
+
+
+
+
+func _on_hurtbox_2_body_entered(body):
+	if body.has_method("die"):
+		body.die()
