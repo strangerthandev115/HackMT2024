@@ -362,7 +362,6 @@ input_1/auto_advance = false
 input_1/reset = true
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_7hmb2"]
-graph_offset = Vector2(-200.288, -68.8816)
 nodes/air_crouch/node = SubResource("AnimationNodeTransition_wfhvm")
 nodes/air_crouch/position = Vector2(240, 380)
 "nodes/crouch 2/node" = SubResource("AnimationNodeAnimation_ntpq2")
@@ -410,7 +409,6 @@ metadata/player = false
 position = Vector2(0, -17.5)
 sprite_frames = ExtResource("1_fgoj4")
 animation = &"idle"
-frame_progress = 0.654051
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
