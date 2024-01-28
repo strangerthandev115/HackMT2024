@@ -1,0 +1,41 @@
+[gd_scene load_steps=4 format=3 uid="uid://dcbfolw1aiu0o"]
+
+[ext_resource type="Script" path="res://scenes/flagpole/flagpole.gd" id="1_jrrba"]
+[ext_resource type="Texture2D" uid="uid://b7804edsrbcqo" path="res://assets/textures/tilesets/tileset.png" id="2_t5pc5"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sb6xu"]
+size = Vector2(16.25, 60)
+
+[node name="Flagpole" type="Area2D"]
+scale = Vector2(0.8, 0.8)
+disable_mode = 2
+collision_layer = 255
+collision_mask = 255
+script = ExtResource("1_jrrba")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(19.25, -51.25)
+texture = ExtResource("2_t5pc5")
+region_enabled = true
+region_rect = Rect2(0, 96, 47, 51)
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+position = Vector2(0.25, -15)
+texture = ExtResource("2_t5pc5")
+region_enabled = true
+region_rect = Rect2(48, 113, 3, 30)
+
+[node name="Sprite2D3" type="Sprite2D" parent="."]
+position = Vector2(31.25, -15)
+texture = ExtResource("2_t5pc5")
+region_enabled = true
+region_rect = Rect2(48, 113, 3, 30)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(24.375, -30)
+scale = Vector2(1, 1)
+shape = SubResource("RectangleShape2D_sb6xu")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

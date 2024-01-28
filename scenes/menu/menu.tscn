@@ -226,7 +226,7 @@ text = "Quit Game"
 
 [node name="MainMenuMusic" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("6_ulpo8")
-volume_db = -15.459
+volume_db = -24.86
 autoplay = true
 
 [node name="CreditsBack" type="Button" parent="."]

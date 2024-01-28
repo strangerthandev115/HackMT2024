@@ -32,9 +32,18 @@ func _ready():
 #executes every frame, for non physics processes
 func _process(delta):
 	if position.y > 1000:
+		$FallDeath.play(0.4)
 		position = start_position
 	#print(position)
+	if Input.is_action_just_pressed("die"):
+		die()
 
+func die():
+	$Death.play(0.4)
+	position = start_position
+
+func win():
+	$Win.play()
 
 #executes every frame dealing with physics processes
 func _physics_process(delta):
@@ -48,6 +57,7 @@ func _physics_process(delta):
 	
 	#jumping mechanics
 	if Input.is_action_just_pressed("jump") && jump_num > 0 && !is_crouching: 
+		$Jump.play()
 		velocity.y = -jump_velocity
 		jump_num -= 1
 		jumpParticles.angle_max = 0 + 20
@@ -99,11 +109,15 @@ func update_animations(horizontal_direction):
 		anim.set("parameters/in_air_state/transition_request", "ground") #ground
 	else:
 		anim.set("parameters/in_air_state/transition_request", "air") #air
+		$Walk.stop()
 	
 	if horizontal_direction!=0 && !is_crouching: 
 		anim.set("parameters/movement/transition_request", "moving") #moving
+		if $Walk.playing == false && is_on_floor():
+			$Walk.play()
 	else:
 		anim.set("parameters/movement/transition_request", "static") #not moving
+		$Walk.stop()
 		
 	if is_crouching:
 		anim.set("parameters/static_crouching/transition_request", "crouch") #crouch
