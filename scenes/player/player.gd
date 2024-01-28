@@ -40,6 +40,7 @@ func _process(delta):
 	#print(position)
 	if Input.is_action_just_pressed("die"):
 		hurt()
+	
 
 func hurt():
 	can_move = false
@@ -79,7 +80,7 @@ func _physics_process(delta):
 		if velocity.y > terminal_velocity: #implement terminal velocity
 			velocity.y = terminal_velocity
 	else:
-		jump_num = max_jumps #reset number of jumps if on floor
+		jump_num = max_jumps #reset number of jumps if on floor	
 	
 	#jumping mechanics
 	if Input.is_action_just_pressed("jump") && jump_num > 0 && !is_crouching && can_move: 

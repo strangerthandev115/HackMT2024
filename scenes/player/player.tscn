@@ -483,6 +483,7 @@ script = ExtResource("1_lsbkp")
 metadata/player = false
 
 [node name="Lives" parent="." instance=ExtResource("2_73gsv")]
+visible = false
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -17.5)
