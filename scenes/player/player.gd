@@ -100,23 +100,18 @@ func update_animations(horizontal_direction):
 	else:
 		anim.set("parameters/in_air_state/transition_request", "air") #air
 	
-	if horizontal_direction == 0: 
-		anim.set("parameters/movement/transition_request", "static") #not moving
-	else:
+	if horizontal_direction!=0 && !is_crouching: 
 		anim.set("parameters/movement/transition_request", "moving") #moving
+	else:
+		anim.set("parameters/movement/transition_request", "static") #not moving
 		
 	if is_crouching:
 		anim.set("parameters/static_crouching/transition_request", "crouch") #crouch
 		anim.set("parameters/air_crouch/transition_request", "crouch") #air crouch
 	else:
 		anim.set("parameters/static_crouching/transition_request", "idle") #idle
-		anim.set("parameters/moving_crouching/transition_request", "run") #run
 		anim.set("parameters/air_crouch/transition_request", "air") #no air crouch
 		
-	if velocity.y < 0: #y negative is going up
-		anim.set("parameters/was_in_air/transition_request", "jump") #jump
-	else:
-		anim.set("parameters/was_in_air/transition_request", "fall") #fall
 
 
 #flips the animation direction to left or right depending on the direction of movement
