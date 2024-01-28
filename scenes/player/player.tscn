@@ -8,6 +8,18 @@
 
 [sub_resource type="Animation" id="Animation_54lqy"]
 length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -17.5)]
+}
 
 [sub_resource type="Animation" id="Animation_cubt6"]
 length = 1.42857
@@ -199,6 +211,18 @@ tracks/1/keys = {
 "update": 1,
 "values": ["idle"]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AnimatedSprite2D:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -17.5)]
+}
 
 [sub_resource type="Animation" id="Animation_bvq0f"]
 tracks/0/type = "value"
@@ -268,14 +292,6 @@ _data = {
 "run": SubResource("Animation_wr3qp")
 }
 
-[sub_resource type="AnimationNodeTransition" id="AnimationNodeTransition_pi4tb"]
-input_0/name = "idle"
-input_0/auto_advance = false
-input_0/reset = true
-input_1/name = "crouching"
-input_1/auto_advance = false
-input_1/reset = true
-
 [sub_resource type="AnimationNodeTransition" id="AnimationNodeTransition_wfhvm"]
 input_0/name = "crouch"
 input_0/auto_advance = false
@@ -288,7 +304,7 @@ input_1/reset = true
 animation = &"crouch"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_wc61a"]
-animation = &"RESET"
+animation = &"crouch (idle)"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_elch2"]
 animation = &"death"
@@ -337,10 +353,16 @@ input_1/reset = true
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_qpqge"]
 animation = &"run"
 
+[sub_resource type="AnimationNodeTransition" id="AnimationNodeTransition_pi4tb"]
+input_0/name = "idle"
+input_0/auto_advance = false
+input_0/reset = true
+input_1/name = "crouch"
+input_1/auto_advance = false
+input_1/reset = true
+
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_7hmb2"]
-graph_offset = Vector2(-911.04, -159.36)
-nodes/Static_crouching/node = SubResource("AnimationNodeTransition_pi4tb")
-nodes/Static_crouching/position = Vector2(-100, 20)
+graph_offset = Vector2(-200.288, -68.8816)
 nodes/air_crouch/node = SubResource("AnimationNodeTransition_wfhvm")
 nodes/air_crouch/position = Vector2(240, 380)
 "nodes/crouch 2/node" = SubResource("AnimationNodeAnimation_ntpq2")
@@ -366,7 +388,9 @@ nodes/movement/position = Vector2(220, 120)
 nodes/output/position = Vector2(620, 280)
 nodes/run/node = SubResource("AnimationNodeAnimation_qpqge")
 nodes/run/position = Vector2(-320, 320)
-node_connections = [&"Static_crouching", 0, &"is_alive", &"Static_crouching", 1, &"crouching", &"air_crouch", 0, &"crouch 2", &"air_crouch", 1, &"jump_or_fall", &"in_air_state", 0, &"movement", &"in_air_state", 1, &"air_crouch", &"is_alive", 0, &"idle", &"is_alive", 1, &"death", &"jump_or_fall", 0, &"jump", &"jump_or_fall", 1, &"falling", &"movement", 0, &"Static_crouching", &"movement", 1, &"run", &"output", 0, &"in_air_state"]
+nodes/static_crouching/node = SubResource("AnimationNodeTransition_pi4tb")
+nodes/static_crouching/position = Vector2(-100, 20)
+node_connections = [&"air_crouch", 0, &"crouch 2", &"air_crouch", 1, &"jump_or_fall", &"in_air_state", 0, &"movement", &"in_air_state", 1, &"air_crouch", &"is_alive", 0, &"idle", &"is_alive", 1, &"death", &"jump_or_fall", 0, &"jump", &"jump_or_fall", 1, &"falling", &"movement", 0, &"static_crouching", &"movement", 1, &"run", &"output", 0, &"in_air_state", &"static_crouching", 0, &"is_alive", &"static_crouching", 1, &"crouching"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_gruwm"]
 particles_animation = true
@@ -386,6 +410,7 @@ metadata/player = false
 position = Vector2(0, -17.5)
 sprite_frames = ExtResource("1_fgoj4")
 animation = &"idle"
+frame_progress = 0.654051
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -398,24 +423,24 @@ libraries = {
 }
 tree_root = SubResource("AnimationNodeBlendTree_7hmb2")
 anim_player = NodePath("../AnimationPlayer")
-parameters/Static_crouching/current_state = "idle"
-parameters/Static_crouching/transition_request = ""
-parameters/Static_crouching/current_index = 0
-parameters/air_crouch/current_state = "crouch"
+parameters/air_crouch/current_state = "air"
 parameters/air_crouch/transition_request = ""
-parameters/air_crouch/current_index = 0
+parameters/air_crouch/current_index = 1
 parameters/in_air_state/current_state = "ground"
 parameters/in_air_state/transition_request = ""
 parameters/in_air_state/current_index = 0
 parameters/is_alive/current_state = "alive"
 parameters/is_alive/transition_request = ""
 parameters/is_alive/current_index = 0
-parameters/jump_or_fall/current_state = "fall"
+parameters/jump_or_fall/current_state = "jump"
 parameters/jump_or_fall/transition_request = ""
-parameters/jump_or_fall/current_index = 1
+parameters/jump_or_fall/current_index = 0
 parameters/movement/current_state = "static"
 parameters/movement/transition_request = ""
 parameters/movement/current_index = 0
+parameters/static_crouching/current_state = "idle"
+parameters/static_crouching/transition_request = ""
+parameters/static_crouching/current_index = 0
 
 [node name="CrouchShapeCast2D" type="ShapeCast2D" parent="."]
 visible = false
@@ -425,7 +450,7 @@ target_position = Vector2(0, 0)
 max_results = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -14)
+position = Vector2(0, -15)
 shape = ExtResource("4_ces4e")
 
 [node name="Camera2D" type="Camera2D" parent="."]
