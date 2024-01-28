@@ -1,11 +1,13 @@
-[gd_scene load_steps=3 format=3 uid="uid://cnmeink4imdof"]
+[gd_scene load_steps=4 format=3 uid="uid://cnmeink4imdof"]
 
 [ext_resource type="Script" path="res://scenes/spike_tilemap/spike_tilemap.gd" id="1_s7rx3"]
 [ext_resource type="Texture2D" uid="uid://dpb47rqq41pl7" path="res://assets/textures/other/Assets.png" id="2_nc4qi"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_37iou"]
+size = Vector2(20, 3.75)
+
 [node name="SpikeyBoi" type="Area2D"]
 scale = Vector2(0.8, 0.8)
-disable_mode = 2
 collision_layer = 255
 collision_mask = 255
 script = ExtResource("1_s7rx3")
@@ -15,10 +17,15 @@ texture = ExtResource("2_nc4qi")
 region_enabled = true
 region_rect = Rect2(176, 128, 16, 16)
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+[node name="KillCollision" type="CollisionPolygon2D" parent="."]
 scale = Vector2(1.1, 1.1)
 polygon = PackedVector2Array(-7.5, 7.5, -5.68182, -2.27273, -2.5, 6.25, 0, -6.81818, 3.75, 2.5, 5, -1.25, 7.5, 7.5)
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(-9.68575e-07, 6.875)
+scale = Vector2(1, 1)
+shape = SubResource("RectangleShape2D_37iou")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
