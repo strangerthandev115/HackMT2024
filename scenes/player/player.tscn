@@ -1,7 +1,8 @@
-[gd_scene load_steps=42 format=3 uid="uid://b0iwhan3emqtq"]
+[gd_scene load_steps=45 format=3 uid="uid://b0iwhan3emqtq"]
 
 [ext_resource type="SpriteFrames" uid="uid://dhg7152veu8rl" path="res://scenes/player/player_frames.tres" id="1_fgoj4"]
 [ext_resource type="Script" path="res://scenes/player/player.gd" id="1_lsbkp"]
+[ext_resource type="PackedScene" uid="uid://cccrv3thxjg41" path="res://scenes/lives/lives.tscn" id="2_73gsv"]
 [ext_resource type="Shape2D" uid="uid://bjs6uxtqlgw1q" path="res://scenes/player/CrouchCollisionShape.tres" id="3_ruosv"]
 [ext_resource type="Shape2D" uid="uid://2nydl5rx8vi2" path="res://scenes/player/StandingCollisionShape.tres" id="4_ces4e"]
 [ext_resource type="Texture2D" uid="uid://c6vbh6pla1oyt" path="res://assets/textures/other/particle.png" id="5_38dyt"]
@@ -11,6 +12,7 @@
 [ext_resource type="AudioStream" uid="uid://ndm1pvu2yt22" path="res://assets/audio/player_fall_out_death(fade).mp3" id="9_nt1ch"]
 [ext_resource type="AudioStream" uid="uid://dpieadfwgo3ws" path="res://assets/audio/player_death.mp3" id="10_365ue"]
 [ext_resource type="AudioStream" uid="uid://dn1j6t00x2k6c" path="res://assets/audio/fanfare_endpoint.wav" id="11_k6uif"]
+[ext_resource type="AudioStream" uid="uid://3gx2atj3sqb7" path="res://assets/audio/player_hurt.mp3" id="11_v5i1e"]
 
 [sub_resource type="Animation" id="Animation_54lqy"]
 length = 0.001
@@ -206,7 +208,7 @@ tracks/1/keys = {
 }
 
 [sub_resource type="Animation" id="Animation_olx0v"]
-length = 0.8
+length = 0.4
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -214,10 +216,10 @@ tracks/0/path = NodePath("AnimatedSprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [0, 1, 2, 3]
+"values": [0, 1]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -230,6 +232,20 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": ["hurt"]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.4),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"check_life"
+}]
 }
 
 [sub_resource type="Animation" id="Animation_ymrfi"]
@@ -357,6 +373,9 @@ animation = &"crouch (idle)"
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_elch2"]
 animation = &"death"
 
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_2n7vc"]
+animation = &"hurt"
+
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ixa2u"]
 animation = &"idle"
 
@@ -372,9 +391,12 @@ input_1/reset = true
 input_0/name = "alive"
 input_0/auto_advance = false
 input_0/reset = true
-input_1/name = "dead"
+input_1/name = "hurt"
 input_1/auto_advance = false
 input_1/reset = true
+input_2/name = "dead"
+input_2/auto_advance = false
+input_2/reset = true
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_rpot6"]
 animation = &"falling"
@@ -416,30 +438,33 @@ input_1/auto_advance = false
 input_1/reset = true
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_7hmb2"]
+graph_offset = Vector2(-165.662, -11.0262)
 nodes/air_crouch/node = SubResource("AnimationNodeTransition_wfhvm")
-nodes/air_crouch/position = Vector2(240, 380)
+nodes/air_crouch/position = Vector2(240, 500)
 "nodes/crouch 2/node" = SubResource("AnimationNodeAnimation_ntpq2")
-"nodes/crouch 2/position" = Vector2(60, 340)
+"nodes/crouch 2/position" = Vector2(60, 500)
 nodes/crouching/node = SubResource("AnimationNodeAnimation_wc61a")
 nodes/crouching/position = Vector2(-340, 120)
 nodes/death/node = SubResource("AnimationNodeAnimation_elch2")
-nodes/death/position = Vector2(60, 200)
+nodes/death/position = Vector2(60, 340)
+nodes/hurt/node = SubResource("AnimationNodeAnimation_2n7vc")
+nodes/hurt/position = Vector2(60, 200)
 nodes/idle/node = SubResource("AnimationNodeAnimation_ixa2u")
 nodes/idle/position = Vector2(-320, -60)
 nodes/in_air_state/node = SubResource("AnimationNodeTransition_v13v0")
-nodes/in_air_state/position = Vector2(420, 240)
+nodes/in_air_state/position = Vector2(420, 380)
 nodes/is_alive/node = SubResource("AnimationNodeTransition_520ir")
 nodes/is_alive/position = Vector2(240, 120)
 nodes/jump/node = SubResource("AnimationNodeStateMachine_vf8js")
-nodes/jump/position = Vector2(40, 520)
+nodes/jump/position = Vector2(40, 640)
 nodes/movement/node = SubResource("AnimationNodeTransition_scxjp")
 nodes/movement/position = Vector2(60, 0)
-nodes/output/position = Vector2(620, 280)
+nodes/output/position = Vector2(620, 380)
 nodes/run/node = SubResource("AnimationNodeAnimation_qpqge")
 nodes/run/position = Vector2(-320, 320)
 nodes/static_crouching/node = SubResource("AnimationNodeTransition_pi4tb")
 nodes/static_crouching/position = Vector2(-180, -40)
-node_connections = [&"air_crouch", 0, &"crouch 2", &"air_crouch", 1, &"jump", &"in_air_state", 0, &"is_alive", &"in_air_state", 1, &"air_crouch", &"is_alive", 0, &"movement", &"is_alive", 1, &"death", &"movement", 0, &"static_crouching", &"movement", 1, &"run", &"output", 0, &"in_air_state", &"static_crouching", 0, &"idle", &"static_crouching", 1, &"crouching"]
+node_connections = [&"air_crouch", 0, &"crouch 2", &"air_crouch", 1, &"jump", &"in_air_state", 0, &"is_alive", &"in_air_state", 1, &"air_crouch", &"is_alive", 0, &"movement", &"is_alive", 1, &"hurt", &"is_alive", 2, &"death", &"movement", 0, &"static_crouching", &"movement", 1, &"run", &"output", 0, &"in_air_state", &"static_crouching", 0, &"idle", &"static_crouching", 1, &"crouching"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_gruwm"]
 particles_animation = true
@@ -456,6 +481,8 @@ collision_layer = 129
 collision_mask = 129
 script = ExtResource("1_lsbkp")
 metadata/player = false
+
+[node name="Lives" parent="." instance=ExtResource("2_73gsv")]
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -17.5)
@@ -552,9 +579,14 @@ stream = ExtResource("9_nt1ch")
 volume_db = -10.576
 pitch_scale = 1.3
 
+[node name="Hurt" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("11_v5i1e")
+volume_db = -10.5
+pitch_scale = 1.3
+
 [node name="Death" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("10_365ue")
-volume_db = -10.576
+volume_db = -10.5
 pitch_scale = 1.3
 
 [node name="Win" type="AudioStreamPlayer" parent="."]

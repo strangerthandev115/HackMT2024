@@ -7,6 +7,7 @@ extends CharacterBody2D
 @export var jump_velocity = 200
 @export var max_jumps = 2
 @export var start_position = Vector2(160, 50)
+@export var max_lives = 3
 
 @onready var crouch_shapecast = $CrouchShapeCast2D
 @onready var cshape = $CollisionShape2D
@@ -16,8 +17,9 @@ extends CharacterBody2D
 
 var speed = main_speed
 var jump_num = max_jumps
+var lives = max_lives
 var is_crouching = false
-var is_alive = true
+var can_move = true
 var stuck_under_object = false
 
 var standing_cshape = preload("res://scenes/player/StandingCollisionShape.tres")
@@ -37,17 +39,31 @@ func _process(delta):
 		position = start_position
 	#print(position)
 	if Input.is_action_just_pressed("die"):
+		hurt()
+
+func hurt():
+	can_move = false
+	lives -= 1
+	anim.set("parameters/is_alive/transition_request", "hurt") #hurt
+
+func check_life():
+	if lives < 1:
 		die()
+		return
+	$Hurt.play()
+	can_move = true
+	anim.set("parameters/is_alive/transition_request", "alive") #hurt
 
 func die():
-	pass
-	#$Death.play() # 0.4
-	#is_alive = false
-	#anim.set("parameters/is_alive/transition_request", "dead") #die
+	#pass
+	$Death.play()
+	can_move = false
+	anim.set("parameters/is_alive/transition_request", "dead") #die
 	
 	
 func respawn():
-	is_alive = true
+	can_move = true
+	lives = max_lives
 	anim.set("parameters/is_alive/transition_request", "alive") #alive
 	position = start_position
 	
@@ -66,7 +82,7 @@ func _physics_process(delta):
 		jump_num = max_jumps #reset number of jumps if on floor
 	
 	#jumping mechanics
-	if Input.is_action_just_pressed("jump") && jump_num > 0 && !is_crouching && is_alive: 
+	if Input.is_action_just_pressed("jump") && jump_num > 0 && !is_crouching && can_move: 
 		$Jump.play()
 		velocity.y = -jump_velocity
 		jump_num -= 1
@@ -79,7 +95,7 @@ func _physics_process(delta):
 	#horixontal movement mechanics
 	#horizontal direction is between -1 and 1 both or neither is 0
 	var horizontal_direction = Input.get_action_strength("right") - Input.get_action_strength("left") 
-	if is_alive:
+	if can_move:
 		velocity.x += speed * horizontal_direction #adds the speed times direction to velocity
 		velocity.x -= velocity.x * (drag*delta) 
 	else:
@@ -90,7 +106,7 @@ func _physics_process(delta):
 	elif velocity.x < -terminal_velocity:
 		velocity.x = -terminal_velocity
 		
-	if horizontal_direction != 0 && is_alive: #flip animation if moving
+	if horizontal_direction != 0 && can_move: #flip animation if moving
 		switch_direction(horizontal_direction)
 	
 	
