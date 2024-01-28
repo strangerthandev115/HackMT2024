@@ -89,7 +89,7 @@ func _physics_process(delta):
 			velocity.y = terminal_velocity
 	else:
 		jump_num = max_jumps #reset number of jumps if on floor	
-		if position.x < 200: #3580
+		if position.x > 200000000: #3580
 			drag = ice_drag
 		else:
 			drag = normal_drag

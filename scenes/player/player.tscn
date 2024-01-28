@@ -518,6 +518,10 @@ parameters/static_crouching/current_state = "idle"
 parameters/static_crouching/transition_request = ""
 parameters/static_crouching/current_index = 0
 
+[node name="BelowRayCast" type="RayCast2D" parent="."]
+target_position = Vector2(0, 15)
+collision_mask = 2
+
 [node name="CrouchShapeCast2D" type="ShapeCast2D" parent="."]
 position = Vector2(0, -10.5)
 shape = ExtResource("3_ruosv")
