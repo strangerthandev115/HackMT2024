@@ -1,4 +1,11 @@
 extends CharacterBody2D
+
+@export var terminal_velocity = 300
+@export var gravity = 10
+
+@onready var sprite = $AnimatedSprite2D
+@onready var anim = $AnimationPlayer
+
 var patrolSpeed = 20
 var chaseSpeed = 40
 var direction = 1
@@ -7,8 +14,6 @@ var substate = 'idle'
 var idle_countdown_initial = 20.0
 var idle_countdown: float
 var health = 3
-@onready var sprite = $AnimatedSprite2D
-@onready var anim = $AnimationPlayer
 # var aggro_radius = 200
 var player_in_aggro_radius = false
 var player_in_attack_attempt_radius = false
@@ -31,16 +36,14 @@ func attack_attempt_check():
 
 # Detect if a patrolling skeleton has reached a wall or ledge
 func stopping_point():
-	if !$LedgeDetector.is_colliding(): # or $WallDetector.is_colliding():
+	if !$LedgeDetector.is_colliding() || $WallDetector.is_colliding():
 		return true
 	return false
 
 # Turns skeleton in opposite direction; used when patrolling
 func flip_character():
 	direction *= -1
-	$LedgeDetector.position.x *= -1
-	sprite.offset.x *= -1
-	sprite.flip_h = !sprite.flip_h
+	scale.x *= -1
 
 # Sets Skeleton sprite to face a specified direction; used when chasing
 func set_sprite_facing(posneg):
@@ -140,6 +143,10 @@ func _process(delta):
 	
 func _physics_process(delta):
 	$Hurtbox2.angular_damp_space_override = $Hurtbox2.angular_damp_space_override
+	if !is_on_floor():
+		velocity.y += gravity
+		if velocity.y > terminal_velocity: #implement terminal velocity
+			velocity.y = terminal_velocity
 	move_and_slide()
 	if state == 'patrol':
 		physics_patrol_behavior(delta)

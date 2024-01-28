@@ -40,9 +40,10 @@ func _process(delta):
 		die()
 
 func die():
-	$Death.play() # 0.4
-	is_alive = false
-	anim.set("parameters/is_alive/transition_request", "dead") #die
+	pass
+	#$Death.play() # 0.4
+	#is_alive = false
+	#anim.set("parameters/is_alive/transition_request", "dead") #die
 	
 	
 func respawn():
