@@ -488,13 +488,9 @@ anim_speed_max = 29.3
 
 [node name="Jump" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("6_4sasn")
-volume_db = -10.576
 
 [node name="Land" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("7_kn8ww")
-volume_db = -9.989
 
 [node name="Walk" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("8_3148h")
-volume_db = -10.576
-pitch_scale = 1.61
