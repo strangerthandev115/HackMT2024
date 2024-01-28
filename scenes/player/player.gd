@@ -17,6 +17,7 @@ extends CharacterBody2D
 var speed = main_speed
 var jump_num = max_jumps
 var is_crouching = false
+var is_alive = true
 var stuck_under_object = false
 
 var standing_cshape = preload("res://scenes/player/StandingCollisionShape.tres")
@@ -39,8 +40,16 @@ func _process(delta):
 		die()
 
 func die():
-	$Death.play(0.4)
+	$Death.play() # 0.4
+	is_alive = false
+	anim.set("parameters/is_alive/transition_request", "dead") #die
+	
+	
+func respawn():
+	is_alive = true
+	anim.set("parameters/is_alive/transition_request", "alive") #alive
 	position = start_position
+	
 
 func win():
 	$Win.play()
@@ -56,7 +65,7 @@ func _physics_process(delta):
 		jump_num = max_jumps #reset number of jumps if on floor
 	
 	#jumping mechanics
-	if Input.is_action_just_pressed("jump") && jump_num > 0 && !is_crouching: 
+	if Input.is_action_just_pressed("jump") && jump_num > 0 && !is_crouching && is_alive: 
 		$Jump.play()
 		velocity.y = -jump_velocity
 		jump_num -= 1
@@ -69,14 +78,18 @@ func _physics_process(delta):
 	#horixontal movement mechanics
 	#horizontal direction is between -1 and 1 both or neither is 0
 	var horizontal_direction = Input.get_action_strength("right") - Input.get_action_strength("left") 
-	velocity.x += speed * horizontal_direction #adds the speed times direction to velocity
-	velocity.x -= velocity.x * (drag*delta) 
+	if is_alive:
+		velocity.x += speed * horizontal_direction #adds the speed times direction to velocity
+		velocity.x -= velocity.x * (drag*delta) 
+	else:
+		velocity.x = 0
 	
 	if velocity.x > terminal_velocity: #set terminal velocities
 		velocity.x = terminal_velocity
 	elif velocity.x < -terminal_velocity:
 		velocity.x = -terminal_velocity
-	if horizontal_direction != 0: #flip animation if moving
+		
+	if horizontal_direction != 0 && is_alive: #flip animation if moving
 		switch_direction(horizontal_direction)
 	
 	

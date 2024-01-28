@@ -162,6 +162,20 @@ tracks/1/keys = {
 "update": 1,
 "values": ["death"]
 }
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(1.4),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"respawn"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_obu3c"]
 length = 0.333333
@@ -379,25 +393,25 @@ nodes/air_crouch/position = Vector2(240, 380)
 "nodes/crouch 2/node" = SubResource("AnimationNodeAnimation_ntpq2")
 "nodes/crouch 2/position" = Vector2(60, 340)
 nodes/crouching/node = SubResource("AnimationNodeAnimation_wc61a")
-nodes/crouching/position = Vector2(-320, 180)
+nodes/crouching/position = Vector2(-340, 120)
 nodes/death/node = SubResource("AnimationNodeAnimation_elch2")
-nodes/death/position = Vector2(-560, 40)
+nodes/death/position = Vector2(60, 200)
 nodes/idle/node = SubResource("AnimationNodeAnimation_ixa2u")
-nodes/idle/position = Vector2(-560, -100)
+nodes/idle/position = Vector2(-320, -60)
 nodes/in_air_state/node = SubResource("AnimationNodeTransition_v13v0")
 nodes/in_air_state/position = Vector2(420, 240)
 nodes/is_alive/node = SubResource("AnimationNodeTransition_520ir")
-nodes/is_alive/position = Vector2(-320, -100)
+nodes/is_alive/position = Vector2(240, 120)
 nodes/jump/node = SubResource("AnimationNodeStateMachine_vf8js")
 nodes/jump/position = Vector2(40, 520)
 nodes/movement/node = SubResource("AnimationNodeTransition_scxjp")
-nodes/movement/position = Vector2(220, 120)
+nodes/movement/position = Vector2(60, 0)
 nodes/output/position = Vector2(620, 280)
 nodes/run/node = SubResource("AnimationNodeAnimation_qpqge")
 nodes/run/position = Vector2(-320, 320)
 nodes/static_crouching/node = SubResource("AnimationNodeTransition_pi4tb")
-nodes/static_crouching/position = Vector2(-100, 20)
-node_connections = [&"air_crouch", 0, &"crouch 2", &"air_crouch", 1, &"jump", &"in_air_state", 0, &"movement", &"in_air_state", 1, &"air_crouch", &"is_alive", 0, &"idle", &"is_alive", 1, &"death", &"movement", 0, &"static_crouching", &"movement", 1, &"run", &"output", 0, &"in_air_state", &"static_crouching", 0, &"is_alive", &"static_crouching", 1, &"crouching"]
+nodes/static_crouching/position = Vector2(-180, -40)
+node_connections = [&"air_crouch", 0, &"crouch 2", &"air_crouch", 1, &"jump", &"in_air_state", 0, &"is_alive", &"in_air_state", 1, &"air_crouch", &"is_alive", 0, &"movement", &"is_alive", 1, &"death", &"movement", 0, &"static_crouching", &"movement", 1, &"run", &"output", 0, &"in_air_state", &"static_crouching", 0, &"idle", &"static_crouching", 1, &"crouching"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_gruwm"]
 particles_animation = true
@@ -417,7 +431,6 @@ metadata/player = false
 position = Vector2(0, -17.5)
 sprite_frames = ExtResource("1_fgoj4")
 animation = &"falling"
-frame = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
