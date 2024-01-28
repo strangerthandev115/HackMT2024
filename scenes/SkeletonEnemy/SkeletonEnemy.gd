@@ -148,8 +148,11 @@ func _physics_process(delta):
 	
 
 func _on_detection_radius_body_entered(body):
-	if body.name == 'player':
-		player_in_aggro_radius = true
+#	if body.name == 'player':
+#		body.die()
+#		player_in_aggro_radius = true
+	if body.has_method("die"):
+		body.die()
 
 
 func _on_animated_sprite_2d_animation_finished():
@@ -164,10 +167,3 @@ func _on_attack_attempt_radius_body_entered(body):
 func _on_attack_attempt_radius_body_exited(body):
 	if body.name == 'player':
 		player_in_attack_attempt_radius = false
-
-
-
-
-func _on_hurtbox_2_body_entered(body):
-	if body.has_method("die"):
-		body.die()
