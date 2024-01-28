@@ -155,9 +155,6 @@ func _physics_process(delta):
 	
 
 func _on_detection_radius_body_entered(body):
-#	if body.name == 'player':
-#		body.die()
-#		player_in_aggro_radius = true
 	if body.has_method("die"):
 		body.die()
 

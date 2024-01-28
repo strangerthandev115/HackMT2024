@@ -7,7 +7,7 @@ extends CharacterBody2D
 @export var jump_velocity = 200
 @export var max_jumps = 2
 @export var start_position = Vector2(160, 50)
-@export var max_lives = 3
+@export var max_lives = 5
 
 @onready var crouch_shapecast = $CrouchShapeCast2D
 @onready var cshape = $CollisionShape2D
@@ -21,6 +21,7 @@ var lives = max_lives
 var is_crouching = false
 var can_move = true
 var stuck_under_object = false
+signal win_signal
 
 var standing_cshape = preload("res://scenes/player/StandingCollisionShape.tres")
 var crouching_cshape = preload("res://scenes/player/CrouchCollisionShape.tres")
@@ -38,8 +39,8 @@ func _process(delta):
 		$FallDeath.play(0.4)
 		position = start_position
 	#print(position)
-	if Input.is_action_just_pressed("die"):
-		hurt()
+	#if Input.is_action_just_pressed("die"):
+		#win()
 	
 
 func hurt():
@@ -71,6 +72,7 @@ func respawn():
 
 func win():
 	$Win.play()
+	emit_signal("win_signal")
 
 #executes every frame dealing with physics processes
 func _physics_process(delta):

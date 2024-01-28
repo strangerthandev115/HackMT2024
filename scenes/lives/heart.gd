@@ -23,8 +23,8 @@ func _process(delta):
 	for heart in $hearts.get_children():
 		var index = heart.get_index()
 
-		if index > last_heart:
-			heart.frame = 1
+		if index >= last_heart:
+			heart.frame = 1 
 		elif index < last_heart:
 			heart.frame = 0
 

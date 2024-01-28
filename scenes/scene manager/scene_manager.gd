@@ -68,12 +68,12 @@ func player_won():
 	# Show win screen
 	$Win.show()
 	# Pause game
-	get_tree().paused = true
+	#get_tree().paused = true
 	# Wait 5 seconds
 	await get_tree().create_timer(2.0).timeout
 	# Hide win screen
 	$Win.hide()
 	# Unpause game
-	get_tree().paused = false
+	#get_tree().paused = false
 	# Return to main menu
 	return_to_title()

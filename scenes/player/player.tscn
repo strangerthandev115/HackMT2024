@@ -483,7 +483,6 @@ script = ExtResource("1_lsbkp")
 metadata/player = false
 
 [node name="Lives" parent="." instance=ExtResource("2_73gsv")]
-visible = false
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -17.5)
@@ -519,7 +518,6 @@ parameters/static_crouching/transition_request = ""
 parameters/static_crouching/current_index = 0
 
 [node name="CrouchShapeCast2D" type="ShapeCast2D" parent="."]
-visible = false
 position = Vector2(0, -10.5)
 shape = ExtResource("3_ruosv")
 target_position = Vector2(0, 0)
