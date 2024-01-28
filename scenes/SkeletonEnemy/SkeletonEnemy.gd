@@ -8,29 +8,42 @@ var idle_countdown_initial = 20.0
 var idle_countdown: float
 var health = 3
 var aggro_radius = 200
+var player_in_aggro_radius = false
+var player_in_attack_attempt_radius = false
+var finishedAnimation = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	idle_countdown = idle_countdown_initial
 
-func aggro_check():
-	# TODO: Check if player is in aggro radius
-	return false
-	
+# Updates sprite animation to the specified animation
+func set_animation(a):
+	finishedAnimation = false # Reset animation-finished flag whenever new animation starts
+	$SkeletonBody/AnimatedSprite2D.animation = a
+
 func attack_attempt_check():
-	# TODO: Check if player is in attack attempt radius
+	return player_in_attack_attempt_radius
+
+# Detect if a patrolling skeleton has reached a wall or ledge
+func stopping_point():
+	if !$LedgeDetector.is_colliding() or $WallDetector.is_colliding():
+		return true
 	return false
 
-func stopping_point():
-	# TODO: Detect wall or ledge for character to turn around at
-	return false
-	
+# Turns skeleton in opposite direction; used when patrolling
 func flip_character():
 	direction *= -1
-	# TODO: Flip sprite
+	$SkeletonBody/AnimatedSprite2D.flip_h = !$SkeletonBody.AnimatedSprite2D.flip_h
+
+# Sets Skeleton sprite to face a specified direction; used when chasing
+func set_sprite_facing(posneg):
+	if posneg > 0:
+		$SkeletonBody/AnimatedSprite2D.flip_h = false
+	else:
+		$SkeletonBody/AnimatedSprite2D.flip_h = true
 
 func patrol_behavior(delta):
-	if aggro_check():
+	if player_in_aggro_radius:
 		state = 'aggro'
 		substate = 'reacting'
 		return
@@ -41,17 +54,16 @@ func patrol_behavior(delta):
 		else:
 			idle_countdown = idle_countdown_initial
 			substate = 'walk'
-			# TODO: Change animation to walking
+			set_animation(&"Walk")
 	elif substate == 'walk':
 		if stopping_point():
 			flip_character()
 			substate = 'idle'
-			# TODO: Change animation to idle
+			set_animation(&"Idle")
 
 func physics_patrol_behavior(delta):
 	if substate == 'walk' and not stopping_point():
-		# TODO: x_position += delta * patrolSpeed * direction
-		pass
+		position += delta * patrolSpeed * direction * Vector2(1, 0)
 		
 func hit_by_player():
 	# TODO: Implement hit detection
@@ -66,50 +78,79 @@ func aggro_behavior():
 		substate = 'hit'
 	
 	if substate == 'hit':
-		if true: # TODO: If animation complete
+		if finishedAnimation:
 			substate = 'chase'
-			# TODO: Set animation to chase animation
+			set_animation(&"Walk")
 	
 	if substate == 'reacting':
-		# Advance reacting animation
-		if true: # TODO: If animation complete
+		if finishedAnimation:
 			substate = 'chase'
-			# TODO: Set animation to chase animation
+			set_animation(&"Walk")
 	
 	if attack_attempt_check() and substate != 'attacking':
 		substate = 'attacking'
 	
 	if substate == 'attacking':
-		if true: # TODO: If animation complete
+		if finishedAnimation:
 			# TODO: enable hurt box
 			# TODO: disable hurt box
 			substate = 'chase'
+			set_animation(&"Walk")
+	
+	if substate == 'chase':
+		set_sprite_facing(relative_player_direction)
 
-func barrier_collision():
-	# TODO: Detect collision with wall or other obstruction
-	return false
+#func barrier_collision():
+	## TODO: Detect collision with wall or other obstruction
+	#return false
 
 func relative_player_direction():
-	# TODO: Return 1 if player to the right; -1 if player to the left
+	var player_node = get_node("res://player/player.tscn")
+	var player_xpos = player_node.global_position.x
+	var skeleton_xpos = self.global_position.x
+	if player_xpos < skeleton_xpos:
+		return -1
 	return 1
 
 func physics_aggro_behavior(delta):
-	if substate == 'walk' and not barrier_collision():
-		# TODO: x_position += delta * chaseSpeed * relative_player_direction()
+	if substate == 'chase' # and not barrier_collision():
+		position += delta * chaseSpeed * relative_player_direction() * Vector2(1, 0)
 		pass
-	
+
+func die_behavior():
+	if finishedAnimation:
+		queue_free()
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if state == 'patrol':
 		patrol_behavior(delta)
 	elif state == 'aggro':
-		pass
+		aggro_behavior()
 	elif state == 'dying':
-		pass
+		die_behavior()
 	
 func _physics_process(delta):
 	if state == 'patrol':
 		physics_patrol_behavior(delta)
 	elif state == 'aggro':
-		pass
+		physics_aggro_behavior(delta)
+	
+
+func _on_detection_radius_body_entered(body):
+	if body.name == 'player':
+		player_in_aggro_radius = true
+
+
+func _on_animated_sprite_2d_animation_finished():
+	finishedAnimation = true
+
+
+func _on_attack_attempt_radius_body_entered(body):
+	if body.name == 'player':
+		player_in_attack_attempt_radius = true
+
+
+func _on_attack_attempt_radius_body_exited(body):
+	if body.name == 'player':
+		player_in_attack_attempt_radius = false
