@@ -1,13 +1,28 @@
-[gd_scene load_steps=33 format=3 uid="uid://b0iwhan3emqtq"]
+[gd_scene load_steps=38 format=3 uid="uid://b0iwhan3emqtq"]
 
 [ext_resource type="SpriteFrames" uid="uid://dhg7152veu8rl" path="res://scenes/player/player_frames.tres" id="1_fgoj4"]
 [ext_resource type="Script" path="res://scenes/player/player.gd" id="1_lsbkp"]
 [ext_resource type="Shape2D" uid="uid://bjs6uxtqlgw1q" path="res://scenes/player/CrouchCollisionShape.tres" id="3_ruosv"]
 [ext_resource type="Shape2D" uid="uid://2nydl5rx8vi2" path="res://scenes/player/StandingCollisionShape.tres" id="4_ces4e"]
 [ext_resource type="Texture2D" uid="uid://c6vbh6pla1oyt" path="res://assets/textures/other/particle.png" id="5_38dyt"]
+[ext_resource type="AudioStream" uid="uid://bl0hbs6jveou8" path="res://assets/audio/player_jump.wav" id="6_4sasn"]
+[ext_resource type="AudioStream" uid="uid://bp6m3irils5hj" path="res://assets/audio/player_land.wav" id="7_kn8ww"]
+[ext_resource type="AudioStream" uid="uid://crp0w6o2ut783" path="res://assets/audio/player_walk.wav" id="8_3148h"]
 
 [sub_resource type="Animation" id="Animation_54lqy"]
 length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -17.5)]
+}
 
 [sub_resource type="Animation" id="Animation_cubt6"]
 length = 1.42857
@@ -199,6 +214,18 @@ tracks/1/keys = {
 "update": 1,
 "values": ["idle"]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AnimatedSprite2D:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -17.5)]
+}
 
 [sub_resource type="Animation" id="Animation_bvq0f"]
 tracks/0/type = "value"
@@ -285,9 +312,6 @@ animation = &"crouch (idle)"
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_elch2"]
 animation = &"death"
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_loo7v"]
-animation = &"falling"
-
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ixa2u"]
 animation = &"idle"
 
@@ -307,16 +331,25 @@ input_1/name = "dead"
 input_1/auto_advance = false
 input_1/reset = true
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_1kvms"]
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_rpot6"]
+animation = &"falling"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_foavy"]
 animation = &"jump"
 
-[sub_resource type="AnimationNodeTransition" id="AnimationNodeTransition_jiol5"]
-input_0/name = "jump"
-input_0/auto_advance = false
-input_0/reset = true
-input_1/name = "fall"
-input_1/auto_advance = false
-input_1/reset = true
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_rselk"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_mhfd3"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_vf8js"]
+states/falling/node = SubResource("AnimationNodeAnimation_rpot6")
+states/falling/position = Vector2(593, 100)
+states/jump/node = SubResource("AnimationNodeAnimation_foavy")
+states/jump/position = Vector2(326, 100)
+transitions = ["Start", "jump", SubResource("AnimationNodeStateMachineTransition_rselk"), "jump", "falling", SubResource("AnimationNodeStateMachineTransition_mhfd3")]
 
 [sub_resource type="AnimationNodeTransition" id="AnimationNodeTransition_scxjp"]
 input_0/name = "static"
@@ -338,7 +371,6 @@ input_1/auto_advance = false
 input_1/reset = true
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_7hmb2"]
-graph_offset = Vector2(-876.85, -25.5894)
 nodes/air_crouch/node = SubResource("AnimationNodeTransition_wfhvm")
 nodes/air_crouch/position = Vector2(240, 380)
 "nodes/crouch 2/node" = SubResource("AnimationNodeAnimation_ntpq2")
@@ -347,18 +379,14 @@ nodes/crouching/node = SubResource("AnimationNodeAnimation_wc61a")
 nodes/crouching/position = Vector2(-320, 180)
 nodes/death/node = SubResource("AnimationNodeAnimation_elch2")
 nodes/death/position = Vector2(-560, 40)
-nodes/falling/node = SubResource("AnimationNodeAnimation_loo7v")
-nodes/falling/position = Vector2(-120, 600)
 nodes/idle/node = SubResource("AnimationNodeAnimation_ixa2u")
 nodes/idle/position = Vector2(-560, -100)
 nodes/in_air_state/node = SubResource("AnimationNodeTransition_v13v0")
 nodes/in_air_state/position = Vector2(420, 240)
 nodes/is_alive/node = SubResource("AnimationNodeTransition_520ir")
 nodes/is_alive/position = Vector2(-320, -100)
-nodes/jump/node = SubResource("AnimationNodeAnimation_1kvms")
-nodes/jump/position = Vector2(-120, 460)
-nodes/jump_or_fall/node = SubResource("AnimationNodeTransition_jiol5")
-nodes/jump_or_fall/position = Vector2(60, 480)
+nodes/jump/node = SubResource("AnimationNodeStateMachine_vf8js")
+nodes/jump/position = Vector2(40, 520)
 nodes/movement/node = SubResource("AnimationNodeTransition_scxjp")
 nodes/movement/position = Vector2(220, 120)
 nodes/output/position = Vector2(620, 280)
@@ -366,7 +394,7 @@ nodes/run/node = SubResource("AnimationNodeAnimation_qpqge")
 nodes/run/position = Vector2(-320, 320)
 nodes/static_crouching/node = SubResource("AnimationNodeTransition_pi4tb")
 nodes/static_crouching/position = Vector2(-100, 20)
-node_connections = [&"air_crouch", 0, &"crouch 2", &"air_crouch", 1, &"jump_or_fall", &"in_air_state", 0, &"movement", &"in_air_state", 1, &"air_crouch", &"is_alive", 0, &"idle", &"is_alive", 1, &"death", &"jump_or_fall", 0, &"jump", &"jump_or_fall", 1, &"falling", &"movement", 0, &"static_crouching", &"movement", 1, &"run", &"output", 0, &"in_air_state", &"static_crouching", 0, &"is_alive", &"static_crouching", 1, &"crouching"]
+node_connections = [&"air_crouch", 0, &"crouch 2", &"air_crouch", 1, &"jump", &"in_air_state", 0, &"movement", &"in_air_state", 1, &"air_crouch", &"is_alive", 0, &"idle", &"is_alive", 1, &"death", &"movement", 0, &"static_crouching", &"movement", 1, &"run", &"output", 0, &"in_air_state", &"static_crouching", 0, &"is_alive", &"static_crouching", 1, &"crouching"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_gruwm"]
 particles_animation = true
@@ -385,7 +413,7 @@ metadata/player = false
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -17.5)
 sprite_frames = ExtResource("1_fgoj4")
-animation = &"idle"
+animation = &"falling"
 frame = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -402,15 +430,12 @@ anim_player = NodePath("../AnimationPlayer")
 parameters/air_crouch/current_state = "air"
 parameters/air_crouch/transition_request = ""
 parameters/air_crouch/current_index = 1
-parameters/in_air_state/current_state = "ground"
+parameters/in_air_state/current_state = "air"
 parameters/in_air_state/transition_request = ""
-parameters/in_air_state/current_index = 0
+parameters/in_air_state/current_index = 1
 parameters/is_alive/current_state = "alive"
 parameters/is_alive/transition_request = ""
 parameters/is_alive/current_index = 0
-parameters/jump_or_fall/current_state = "jump"
-parameters/jump_or_fall/transition_request = ""
-parameters/jump_or_fall/current_index = 0
 parameters/movement/current_state = "static"
 parameters/movement/transition_request = ""
 parameters/movement/current_index = 0
@@ -432,6 +457,7 @@ shape = ExtResource("4_ces4e")
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(0, -43)
 offset = Vector2(0, 6)
+position_smoothing_enabled = true
 
 [node name="Effects" type="Node2D" parent="."]
 
@@ -460,3 +486,16 @@ scale_amount_min = 0.4
 color_ramp = SubResource("Gradient_qgi5t")
 anim_speed_min = 29.3
 anim_speed_max = 29.3
+
+[node name="Jump" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_4sasn")
+volume_db = -10.576
+
+[node name="Land" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_kn8ww")
+volume_db = -9.989
+
+[node name="Walk" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_3148h")
+volume_db = -10.576
+pitch_scale = 1.3

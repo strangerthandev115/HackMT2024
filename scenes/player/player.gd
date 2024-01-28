@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-@export var speed = 30
+@export var main_speed = 30
 @export var terminal_velocity = 300
 @export var drag = 10
 @export var gravity = 10
@@ -14,6 +14,7 @@ extends CharacterBody2D
 @onready var anim = $AnimationTree
 @onready var jumpParticles = $Effects/jumpParticles
 
+var speed = main_speed
 var jump_num = max_jumps
 var is_crouching = false
 var stuck_under_object = false
@@ -47,12 +48,13 @@ func _physics_process(delta):
 	
 	#jumping mechanics
 	if Input.is_action_just_pressed("jump") && jump_num > 0 && !is_crouching: 
+		$Jump.play()
 		velocity.y = -jump_velocity
 		jump_num -= 1
 		jumpParticles.angle_max = 0 + 20
 		jumpParticles.gravity = Vector2(velocity.x / 8, -velocity.y / 8)
 		jumpParticles.emitting = 0 - 20
-		
+	
 
 	
 	#horixontal movement mechanics
@@ -63,11 +65,10 @@ func _physics_process(delta):
 	
 	if velocity.x > terminal_velocity: #set terminal velocities
 		velocity.x = terminal_velocity
-	elif velocity.x< -terminal_velocity:
+	elif velocity.x < -terminal_velocity:
 		velocity.x = -terminal_velocity
-	if horizontal_direction != 0: #update animation
+	if horizontal_direction != 0: #flip animation if moving
 		switch_direction(horizontal_direction)
-	
 	
 	
 	#crouching mechanics
@@ -88,7 +89,7 @@ func _physics_process(delta):
 	update_animations(horizontal_direction)
 
 
-#uses the 2 raycasts to return true if there is nothing on top
+#uses the shapecast to return true if there is nothing on top
 func above_head_is_empty() -> bool:
 	return !crouch_shapecast.is_colliding()
 
@@ -99,38 +100,35 @@ func update_animations(horizontal_direction):
 		anim.set("parameters/in_air_state/transition_request", "ground") #ground
 	else:
 		anim.set("parameters/in_air_state/transition_request", "air") #air
+		$Walk.stop()
 	
-	if horizontal_direction == 0: 
-		anim.set("parameters/movement/transition_request", "static") #not moving
-	else:
+	if horizontal_direction!=0 && !is_crouching: 
 		anim.set("parameters/movement/transition_request", "moving") #moving
+		if $Walk.playing == false && is_on_floor():
+			$Walk.play()
+	else:
+		anim.set("parameters/movement/transition_request", "static") #not moving
+		$Walk.stop()
 		
 	if is_crouching:
 		anim.set("parameters/static_crouching/transition_request", "crouch") #crouch
 		anim.set("parameters/air_crouch/transition_request", "crouch") #air crouch
 	else:
 		anim.set("parameters/static_crouching/transition_request", "idle") #idle
-		anim.set("parameters/moving_crouching/transition_request", "run") #run
 		anim.set("parameters/air_crouch/transition_request", "air") #no air crouch
 		
-	if velocity.y < 0: #y negative is going up
-		anim.set("parameters/was_in_air/transition_request", "jump") #jump
-	else:
-		anim.set("parameters/was_in_air/transition_request", "fall") #fall
 
 
 #flips the animation direction to left or right depending on the direction of movement
 func switch_direction(horizontal_direction): 
 	sprite.flip_h = (horizontal_direction < 0) #uses horizontal direction to become a boolean
-	sprite.position.x = horizontal_direction #4 is the offset of the sprite from center
 
 
 #updates the boolean and collision shape when crouching
 func crouch():
 	if !is_crouching:
 		is_crouching = true
-		anim.set("crouch_walk_time", 0.5) #set the animation speed to half
-		speed /= 2 #set speed to normal
+		speed = 0 #set velocity to 0
 		cshape.shape = crouching_cshape
 		cshape.position.y = -10.5
 
@@ -140,6 +138,6 @@ func stand():
 	if is_crouching:
 		is_crouching = false
 		anim.set("crouch_walk_time", 1) #set the animation speed to normal
-		speed *= 2 #set speed to normal
+		speed = main_speed #set speed to normal
 		cshape.shape = standing_cshape
 		cshape.position.y = -15
