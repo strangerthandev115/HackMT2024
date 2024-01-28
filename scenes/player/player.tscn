@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://b0iwhan3emqtq"]
+[gd_scene load_steps=41 format=3 uid="uid://b0iwhan3emqtq"]
 
 [ext_resource type="SpriteFrames" uid="uid://dhg7152veu8rl" path="res://scenes/player/player_frames.tres" id="1_fgoj4"]
 [ext_resource type="Script" path="res://scenes/player/player.gd" id="1_lsbkp"]
@@ -8,6 +8,9 @@
 [ext_resource type="AudioStream" uid="uid://bl0hbs6jveou8" path="res://assets/audio/player_jump.wav" id="6_4sasn"]
 [ext_resource type="AudioStream" uid="uid://bp6m3irils5hj" path="res://assets/audio/player_land.wav" id="7_kn8ww"]
 [ext_resource type="AudioStream" uid="uid://crp0w6o2ut783" path="res://assets/audio/player_walk.wav" id="8_3148h"]
+[ext_resource type="AudioStream" uid="uid://ndm1pvu2yt22" path="res://assets/audio/player_fall_out_death(fade).mp3" id="9_nt1ch"]
+[ext_resource type="AudioStream" uid="uid://dpieadfwgo3ws" path="res://assets/audio/player_death.mp3" id="10_365ue"]
+[ext_resource type="AudioStream" uid="uid://dn1j6t00x2k6c" path="res://assets/audio/fanfare_endpoint.wav" id="11_k6uif"]
 
 [sub_resource type="Animation" id="Animation_54lqy"]
 length = 0.001
@@ -414,7 +417,6 @@ metadata/player = false
 position = Vector2(0, -17.5)
 sprite_frames = ExtResource("1_fgoj4")
 animation = &"falling"
-frame = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -499,3 +501,18 @@ volume_db = -9.989
 stream = ExtResource("8_3148h")
 volume_db = -10.576
 pitch_scale = 1.3
+
+[node name="FallDeath" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("9_nt1ch")
+volume_db = -10.576
+pitch_scale = 1.3
+
+[node name="Death" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("10_365ue")
+volume_db = -10.576
+pitch_scale = 1.3
+
+[node name="Win" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("11_k6uif")
+volume_db = 10.0
+pitch_scale = 1.5

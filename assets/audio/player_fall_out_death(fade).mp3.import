@@ -13,7 +13,7 @@ dest_files=["res://.godot/imported/player_fall_out_death(fade).mp3-dd89c1be0710c
 [params]
 
 loop=false
-loop_offset=0
-bpm=0
+loop_offset=0.0
+bpm=0.0
 beat_count=0
 bar_beats=4

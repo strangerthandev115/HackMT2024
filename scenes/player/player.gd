@@ -32,9 +32,18 @@ func _ready():
 #executes every frame, for non physics processes
 func _process(delta):
 	if position.y > 1000:
+		$FallDeath.play(0.4)
 		position = start_position
 	#print(position)
+	if Input.is_action_just_pressed("die"):
+		die()
 
+func die():
+	$Death.play(0.4)
+	position = start_position
+
+func win():
+	$Win.play()
 
 #executes every frame dealing with physics processes
 func _physics_process(delta):
