@@ -101,7 +101,6 @@ layer_5/tile_data = PackedInt32Array(262150, 327680, 5, 262151, 393216, 5, 26215
 
 [node name="Camera2D" type="Camera2D" parent="SubViewportContainer2/SubViewport"]
 scale = Vector2(3.65, 3.65)
-offset = Vector2(2.08165e-12, 150)
 zoom = Vector2(0.6, 0.6)
 
 [node name="Sprite2D" type="Sprite2D" parent="SubViewportContainer2/SubViewport"]
